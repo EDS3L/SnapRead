@@ -3,6 +3,7 @@ package com.snapread.dev.invoice.controller;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.snapread.dev.invoice.model.Invoice;
 import com.snapread.dev.invoice.service.InvoiceService;
+import com.snapread.dev.invoice.service.UsersInvoiceService;
 import com.snapread.dev.ocr.service.JsonService;
 import com.snapread.dev.ocr.service.PythonService;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,24 +19,31 @@ import java.util.List;
 @RequestMapping("/api/invoice")
 public class InvoiceController {
 
-    private final InvoiceService invoiceService;
+    private final UsersInvoiceService usersInvoiceService;
 
-    public InvoiceController(InvoiceService invoiceService) {
-        this.invoiceService = invoiceService;
+
+    public InvoiceController(UsersInvoiceService usersInvoiceService) {
+        this.usersInvoiceService = usersInvoiceService;
     }
 
     @PostMapping(value = "" ,consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> doOcr(@RequestParam("file")MultipartFile file) {
+    public ResponseEntity<?> doOcr(@RequestParam("file")MultipartFile file,@RequestParam String username) {
         try {
-            return ResponseEntity.ok(invoiceService.createInvoice(file));
+            return ResponseEntity.ok(usersInvoiceService.generateUsersInvoices(username, file));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
 
     }
 
-    @GetMapping("getAll")
-    public List<Invoice> getAll() {
-        return invoiceService.getAllInvoices();
+
+    @GetMapping("/usersInvoice")
+    public ResponseEntity<?> getUsersInvoice(@RequestParam String username) {
+        try {
+            return ResponseEntity.ok(usersInvoiceService.getAllUsersInvoices(username));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
+
 }

@@ -1,5 +1,7 @@
 package com.snapread.dev.auth.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.snapread.dev.invoice.model.Invoice;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,6 +26,10 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("user")
+    private List<Invoice> invoices;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -69,5 +75,13 @@ public class User implements UserDetails {
 
     public Role getRole() {
         return role;
+    }
+
+    public List<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(List<Invoice> invoices) {
+        this.invoices = invoices;
     }
 }

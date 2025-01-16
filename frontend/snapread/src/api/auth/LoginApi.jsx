@@ -1,9 +1,9 @@
-import axios from 'axios';
+import axios from '../../config/axiosConfig';
 
 export const login = async (email, password, nav, setError) => {
   try {
     if (email != null && password != null) {
-      const response = await axios.post('http://localhost:8080/api/login', {
+      const response = await axios.post('/api/login', {
         email,
         password,
       });

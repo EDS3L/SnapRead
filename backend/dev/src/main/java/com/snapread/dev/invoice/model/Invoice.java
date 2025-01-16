@@ -1,7 +1,10 @@
 package com.snapread.dev.invoice.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.snapread.dev.auth.model.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -19,7 +22,6 @@ public class Invoice {
     private String supplier_name;
     @JsonProperty("supplier_nip")
     private String supplier_nip;
-    //    @JsonProperty("supplier_address")
     private String supplier_address;
     @JsonProperty("amount_net")
     private String amount_net;
@@ -32,13 +34,18 @@ public class Invoice {
     private String invoice_date;
     @JsonProperty("due_date")
     private String due_date;
-    //    @JsonProperty("description")
     private String description;
     @Lob
-    private byte[] invoice_image;
+    private String invoice_image;
     private LocalDate created_at;
     @Lob
     private byte[] attached_image;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
+
 
     public Invoice() {
     }
@@ -152,11 +159,11 @@ public class Invoice {
         this.description = description;
     }
 
-    public byte[] getInvoice_image() {
+    public String getInvoice_image() {
         return invoice_image;
     }
 
-    public void setInvoice_image(byte[] invoice_image) {
+    public void setInvoice_image(String invoice_image) {
         this.invoice_image = invoice_image;
     }
 
@@ -174,5 +181,13 @@ public class Invoice {
 
     public void setAttached_image(byte[] attached_image) {
         this.attached_image = attached_image;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

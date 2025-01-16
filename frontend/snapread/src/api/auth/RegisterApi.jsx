@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const register = async (username, email, password, setError) => {
-  const url = 'http://localhost:8080/api/register';
+  const url = '/api/register';
 
   if (username === '' || email === '' || password === '') {
     console.log('Please fill in all fields');

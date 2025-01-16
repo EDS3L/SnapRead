@@ -56,6 +56,7 @@ const AuthForm = ({ type }) => {
             className="w-full outline-none bg-gray-50"
             placeholder="example@web.com"
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </div>
       </div>
@@ -69,6 +70,7 @@ const AuthForm = ({ type }) => {
             className="w-full outline-none bg-gray-50"
             placeholder="*********************"
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
           {showPassword ? (
             <i
@@ -97,6 +99,7 @@ const AuthForm = ({ type }) => {
                 className="w-full outline-none bg-gray-50"
                 placeholder="*********************"
                 onChange={(e) => setConfirmPasword(e.target.value)}
+                required
               />
             </div>
           </div>
@@ -111,6 +114,7 @@ const AuthForm = ({ type }) => {
                 className="w-full outline-none bg-gray-50"
                 placeholder="Username"
                 onChange={(e) => setUsername(e.target.value)}
+                required
               />
             </div>
           </div>

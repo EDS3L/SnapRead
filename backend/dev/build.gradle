@@ -37,7 +37,8 @@ dependencies {
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 	implementation 'org.hibernate:hibernate-validator:8.0.0.Final'
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
-
+	implementation 'com.cloudinary:cloudinary-http5:2.0.0'
+	implementation 'io.github.cdimascio:java-dotenv:5.2.2'
 
 }
 

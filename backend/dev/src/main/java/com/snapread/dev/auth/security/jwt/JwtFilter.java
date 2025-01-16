@@ -40,7 +40,7 @@ public class JwtFilter extends OncePerRequestFilter {
         if (token != null && jwtService.validateToken(token)) {
             Claims claims = jwtService.getClaimsFromToken(token);
             String username = claims.getSubject();
-            String role = claims.getAudience().toString();
+            String role = claims.get("role").toString();
 
             GrantedAuthority authority = new SimpleGrantedAuthority(role);
 
