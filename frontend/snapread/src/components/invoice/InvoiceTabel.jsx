@@ -22,32 +22,32 @@ function InvoiceTabel({ invoiceService, userService }) {
   }, [invoiceService, userService, token]);
 
   return (
-    <div className="relative overflow-x-auto rounded-xl overflow-y-auto max-h-96">
+    <div className="relative overflow-x-auto h-full  overflow-y-auto border border-slate-200 rounded-lg ">
       <table className="w-full text-sm text-left rtl:text-right ">
-        <thead className="uppercase font-bold bg-slate-100 ">
+        <thead className="uppercase font-bold bg-slate-100 sticky top-0">
           <tr>
-            <th scope="col" className="px-6 py-3 rounded-s-lg ">
+            <th scope="col" className="px-6 py-3 ">
               ID
             </th>
-            <th scope="col" className="px-6 py-3 rounded-s-lg">
+            <th scope="col" className="px-6 py-3 ">
               Firma
             </th>
             <th scope="col" className="px-6 py-3">
               NIP
             </th>
-            <th scope="col" className="px-6 py-3 rounded-e-lg">
+            <th scope="col" className="px-6 py-3 ">
               Netto
             </th>
-            <th scope="col" className="px-6 py-3 rounded-e-lg">
+            <th scope="col" className="px-6 py-3 ">
               Vat
             </th>
-            <th scope="col" className="px-6 py-3 rounded-e-lg">
+            <th scope="col" className="px-6 py-3 ">
               Brutto
             </th>
-            <th scope="col" className="px-6 py-3 rounded-e-lg">
+            <th scope="col" className="px-6 py-3 ">
               Vat %
             </th>
-            <th scope="col" className="px-6 py-3 rounded-e-lg">
+            <th scope="col" className="px-6 py-3 ">
               Data dodania
             </th>
           </tr>
@@ -55,7 +55,7 @@ function InvoiceTabel({ invoiceService, userService }) {
         <tbody>
           {invoices.map((invoice) => {
             return (
-              <tr className="border border-slate-200 " key={invoice.id}>
+              <tr className="even:bg-slate-50 " key={invoice.id}>
                 <th
                   scope="row"
                   className="px-6 py-4  text-gray-900 font-bold whitespace-nowrap "

@@ -5,37 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afbe0d01-5807-4320-a12b-039942b2e2bd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/dev/src/main/java/com/snapread/dev/invoice/controller/InvoiceController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/src/main/java/com/snapread/dev/invoice/model/Invoice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/src/main/java/com/snapread/dev/invoice/repository/InvoiceRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/src/main/java/com/snapread/dev/invoice/service/InvoiceService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/src/main/java/com/snapread/dev/ocr/service/JsonService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/src/main/java/com/snapread/dev/ocr/service/PythonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnapRead/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnapRead/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnapRead/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnapRead/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnapRead/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnapRead/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnapRead/src/main/java/com/snapread/SnapRead/SnapReadApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnapRead/src/main/java/com/snapread/SnapRead/config/Config.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnapRead/src/main/java/com/snapread/SnapRead/entity/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnapRead/src/main/java/com/snapread/SnapRead/entity/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnapRead/src/main/java/com/snapread/SnapRead/entity/controller/LoginController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnapRead/src/main/java/com/snapread/SnapRead/entity/controller/RegisterController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnapRead/src/main/java/com/snapread/SnapRead/entity/dto/UserDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnapRead/src/main/java/com/snapread/SnapRead/entity/types/Password.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnapRead/src/main/java/com/snapread/SnapRead/invoice/model/InvoiceEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnapRead/src/main/java/com/snapread/SnapRead/seciurty/JwtFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnapRead/src/main/java/com/snapread/SnapRead/seciurty/JwtService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnapRead/src/main/java/com/snapread/SnapRead/seciurty/SecurityConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnapRead/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnapRead/src/test/java/com/snapread/SnapRead/SnapReadApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/dev/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/main/java/com/snapread/dev/ocr/promps/promptInvocie.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/main/java/com/snapread/dev/ocr/promps/promptInvocie.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/dev/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,12 +39,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.SnapReadApplication.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/projekty/SnapRead/backend/dev",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/m.barlik/Videos/aws",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -83,26 +58,12 @@
       <recent name="com.snapread.SnapRead.entity.dto" />
       <recent name="com.snapread.SnapRead.seciurty" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="SnapReadApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.snapread.SnapRead.SnapReadApplication" />
-      <module name="SnapRead" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.snapread.SnapRead.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.SnapReadApplication" />
-      </list>
-    </recent_temporary>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\m.barlik\Videos\aws\SnapRead\backend\dev\src" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\m.barlik\Videos\aws\SnapRead\backend\dev\src\main\java\com\snapread" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

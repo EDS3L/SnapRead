@@ -3,7 +3,7 @@ import SideBar from '../../components/sideBar/SideBar';
 
 function InvoiceLayout() {
   return (
-    <div className="flex w-screen h-screen">
+    <div className="flex h-screen">
       <SideBar />
       <Invoice />
     </div>
