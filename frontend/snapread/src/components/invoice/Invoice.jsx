@@ -4,6 +4,7 @@ import UserService from '../../services/user/UserService';
 import InvoiceTabel from './InvoiceTabel';
 import LoadingScreen from '../loading/LoadingScreen';
 import InvoicePopup from './InvoicePopup';
+import InvoiceErrorMessage from '../errors/InvoiceErrorMessage';
 
 function Invoice() {
   const [file, setFile] = useState(null);
@@ -12,6 +13,7 @@ function Invoice() {
   const [loading, setLoading] = useState(null);
   const token = localStorage.getItem('token');
   const [popup, setPopup] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -19,8 +21,8 @@ function Invoice() {
 
   const handlePopup = () => {
     setPopup(!popup);
-    console.log(popup)
-  }
+    console.log(popup);
+  };
 
   const handleUpload = async () => {
     if (!file) {
@@ -32,23 +34,28 @@ function Invoice() {
       const response = await invoiceService.createInvoice(
         file,
         userService.getUsernameFromToken(token),
-        token
+        token,
+        setError
       );
       console.log('Odpowiedź serwera:', response);
     } catch (error) {
       console.error('Błąd:', error);
     } finally {
       setLoading(false);
-      setPopup(false)
+      setPopup(false);
     }
   };
   return (
     <>
-    <InvoicePopup handleUpload={handleUpload} handleFileChange={handleFileChange} popup={popup} setPopup={setPopup} />
-      {loading && (
-      <LoadingScreen value="Dodawanie fakutry"/>
-      )}
-      
+      <InvoicePopup
+        handleUpload={handleUpload}
+        handleFileChange={handleFileChange}
+        popup={popup}
+        setPopup={setPopup}
+      />
+      {loading && <LoadingScreen value="Dodawanie fakutry" />}
+      {error && <InvoiceErrorMessage value={error} />}
+
       <div className="flex  flex-col w-full p-3 ">
         <header className="flex flex-col p-4 w-full gap-5 bg-slate-100 rounded-3xl mb-3 ">
           <div className="w-full">
@@ -63,7 +70,6 @@ function Invoice() {
             </span>
 
             <div className="flex text-center align-middle">
-              
               <button
                 onClick={handlePopup}
                 className="cursor-pointer bg-blue-600 p-3 rounded-md text-white font-bold"

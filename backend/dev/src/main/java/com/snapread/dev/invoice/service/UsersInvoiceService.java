@@ -42,7 +42,7 @@ public class UsersInvoiceService {
             return invoice;
 
         } catch (Exception e) {
-            throw new IOException("Invoice does not assign to user" + e.getMessage());
+            throw new IOException(e.getMessage());
         }
     }
 
@@ -50,7 +50,6 @@ public class UsersInvoiceService {
     public List<Invoice> getAllUsersInvoices(String username) {
         try {
             User user = userRepository.findByUsername(username).orElseThrow(() -> new NoSuchElementException("User with username " + username + " is not found"));
-            System.out.println(user.getInvoices());
             return user.getInvoices();
         } catch (Exception e) {
             throw new RuntimeException("Error getting invoices for user: " + e.getMessage());

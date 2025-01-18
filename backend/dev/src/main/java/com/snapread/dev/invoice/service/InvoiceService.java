@@ -53,7 +53,7 @@ public class InvoiceService {
 
             return invoice;
         } catch (Exception e) {
-            throw new RuntimeException("Error creating invoice" + e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -66,4 +66,9 @@ public class InvoiceService {
             throw new IOException("Error uploading file" + e.getMessage());
         }
     }
+
+
+
+
+
 }

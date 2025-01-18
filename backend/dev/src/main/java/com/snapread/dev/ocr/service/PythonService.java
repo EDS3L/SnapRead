@@ -1,5 +1,6 @@
 package com.snapread.dev.ocr.service;
 
+import com.snapread.dev.invoice.types.InvoiceFile;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,18 +17,24 @@ public class PythonService {
 
     private File tempFile;
 
+
     public String doOcr(MultipartFile file, String promptPath) throws IOException {
         tempFile = null;
         try {
-            tempFile = File.createTempFile("upload-", "-" + file.getOriginalFilename());
-            file.transferTo(tempFile);
+                tempFile = File.createTempFile("upload-", "-" + file.getOriginalFilename());
+                file.transferTo(tempFile);
 
-            Process process = runPython(tempFile, promptPath).start();
+            if (InvoiceFile.validate(tempFile)) {
 
-            StringBuilder output = new StringBuilder();
-            reader(process, output);
+                Process process = runPython(tempFile, promptPath).start();
 
-            return output.toString();
+                StringBuilder output = new StringBuilder();
+                reader(process, output);
+
+                return output.toString();
+            }
+
+            throw new IOException("Could not execute");
         } catch (IOException e) {
             throw e;
         }

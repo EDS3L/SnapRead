@@ -1,7 +1,7 @@
 import axios from '../../config/axiosConfig';
 
 class InvoiceService {
-  async createInvoice(file, username, token) {
+  async createInvoice(file, username, token, setError) {
     try {
       const formData = new FormData();
       formData.append('file', file);
@@ -17,7 +17,10 @@ class InvoiceService {
       );
       return response.data;
     } catch (err) {
-      console.error(err.response.data || err);
+      setError(err.response.data);
+      setTimeout(() => {
+        setError(false);
+      }, 4000);
     }
   }
 
