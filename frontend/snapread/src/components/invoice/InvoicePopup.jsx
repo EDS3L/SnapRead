@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const InvoicePopup = ({ handleUpload, handleFileChange, setPopup, popup }) => {
   const handlePopup = () => {
@@ -11,9 +11,11 @@ const InvoicePopup = ({ handleUpload, handleFileChange, setPopup, popup }) => {
       {popup && (
         <div className=" flex w-full h-full absolute justify-center items-center bg-opacity-60 z-10 bg-gray-500 ">
           <div className="bg-white flex flex-col justify-center text-center p-5 rounded-lg">
-            <button onClick={handlePopup} className="flex justify-end">
-              <i className="fa-solid fa-x p-3"></i>
-            </button>
+            <div className="w-full flex justify-end">
+              <button onClick={handlePopup} className="flex justify-end">
+                <i className="fa-solid fa-x p-3"></i>
+              </button>
+            </div>
             <span className="p-3 text-slate-900 text-xl font-bold">
               Zeskanuj swoją fakturę
             </span>
@@ -33,6 +35,13 @@ const InvoicePopup = ({ handleUpload, handleFileChange, setPopup, popup }) => {
       )}
     </>
   );
+};
+
+InvoicePopup.propTypes = {
+  handleUpload: PropTypes.func.isRequired,
+  handleFileChange: PropTypes.func.isRequired,
+  setPopup: PropTypes.func.isRequired,
+  popup: PropTypes.bool.isRequired,
 };
 
 export default InvoicePopup;

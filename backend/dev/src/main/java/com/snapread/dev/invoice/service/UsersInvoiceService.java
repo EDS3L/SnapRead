@@ -55,4 +55,12 @@ public class UsersInvoiceService {
             throw new RuntimeException("Error getting invoices for user: " + e.getMessage());
         }
     }
+
+    public Invoice getUsersInvoiceById(Long invoiceId) {
+        try {
+            return invoiceRepository.findById(invoiceId).orElseThrow(() -> new NoSuchElementException("Invoice with id " + invoiceId + " is not found"));
+        } catch (Exception e) {
+            throw new RuntimeException("Error getting invoice: " + e.getMessage());
+        }
+    }
 }

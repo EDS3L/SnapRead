@@ -22,56 +22,68 @@ function InvoiceTabel({ invoiceService, userService }) {
   }, [invoiceService, userService, token]);
 
   return (
-    <div className="relative overflow-x-auto h-full  overflow-y-auto border border-slate-200 rounded-lg ">
-      <table className="w-full text-sm text-left rtl:text-right ">
+    <div className="max-w-full h-full overflow-x-auto overflow-y-auto border border-slate-200 rounded-lg">
+      <table className="table-auto w-full min-w-max text-sm text-left rtl:text-right">
         <thead className="uppercase font-bold bg-slate-100 sticky top-0">
           <tr>
-            <th scope="col" className="px-6 py-3 ">
+            <th scope="col" className="px-6 py-3 whitespace-nowrap">
               ID
             </th>
-            <th scope="col" className="px-6 py-3 ">
+            <th scope="col" className="px-6 py-3 whitespace-nowrap">
               Firma
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="px-6 py-3 whitespace-nowrap">
               NIP
             </th>
-            <th scope="col" className="px-6 py-3 ">
+            <th scope="col" className="px-6 py-3 whitespace-nowrap">
               Netto
             </th>
-            <th scope="col" className="px-6 py-3 ">
+            <th scope="col" className="px-6 py-3 whitespace-nowrap">
               Vat
             </th>
-            <th scope="col" className="px-6 py-3 ">
+            <th scope="col" className="px-6 py-3 whitespace-nowrap">
               Brutto
             </th>
-            <th scope="col" className="px-6 py-3 ">
+            <th scope="col" className="px-6 py-3 whitespace-nowrap">
               Vat %
             </th>
-            <th scope="col" className="px-6 py-3 ">
+            <th scope="col" className="px-6 py-3 whitespace-nowrap">
               Data dodania
             </th>
           </tr>
         </thead>
         <tbody>
-          {invoices.map((invoice) => {
-            return (
-              <tr className="even:bg-slate-50 " key={invoice.id}>
-                <th
-                  scope="row"
-                  className="px-6 py-4  text-gray-900 font-bold whitespace-nowrap "
-                >
-                  {invoice.id}
-                </th>
-                <td className="px-6 py-4">{invoice.supplier_name}</td>
-                <td className="px-6 py-4">{invoice.supplier_nip}</td>
-                <td className="px-6 py-4">{invoice.amount_net}</td>
-                <td className="px-6 py-4">{invoice.amount_vat}</td>
-                <td className="px-6 py-4">{invoice.amount_gross}</td>
-                <td className="px-6 py-4">{invoice.vat_percent}</td>
-                <td className="px-6 py-4">{invoice.created_at}</td>
-              </tr>
-            );
-          })}
+          {invoices.map((invoice) => (
+            <tr className="even:bg-slate-50" key={invoice.id}>
+              <th
+                scope="row"
+                className="px-6 py-4 text-gray-900 font-bold whitespace-nowrap"
+              >
+                {invoice.id}
+              </th>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {invoice.supplier_name}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {invoice.supplier_nip}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {invoice.amount_net}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {invoice.amount_vat}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {invoice.amount_gross}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {invoice.vat_percent}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {invoice.created_at}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

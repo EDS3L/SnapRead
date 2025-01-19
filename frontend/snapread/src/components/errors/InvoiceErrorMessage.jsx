@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 const InvoiceErrorMessage = ({ value }) => {
   return (
-    <div className="w-full absolute flex justify-center">
+    <div className="w-full absolute flex justify-center z-20">
       <div className="flex text-red-500  m-2 p-2  bg-red-200 rounded-md absolute ">
         {value}
       </div>

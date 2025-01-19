@@ -21,7 +21,6 @@ function Invoice() {
 
   const handlePopup = () => {
     setPopup(!popup);
-    console.log(popup);
   };
 
   const handleUpload = async () => {
@@ -37,12 +36,12 @@ function Invoice() {
         token,
         setError
       );
-      console.log('Odpowiedź serwera:', response);
+      console.log(response);
+      // todo: dodać jakieś ładne powiadomienie o dodaniu faktury
     } catch (error) {
       console.error('Błąd:', error);
     } finally {
       setLoading(false);
-      setPopup(false);
     }
   };
   return (
@@ -56,7 +55,7 @@ function Invoice() {
       {loading && <LoadingScreen value="Dodawanie fakutry" />}
       {error && <InvoiceErrorMessage value={error} />}
 
-      <div className="flex  flex-col w-full p-3 ">
+      <div className="flex  flex-col w-[calc(100%-3.2rem)] p-3 ">
         <header className="flex flex-col p-4 w-full gap-5 bg-slate-100 rounded-3xl mb-3 ">
           <div className="w-full">
             <span className="text-gray-800 font-bold text-2xl">

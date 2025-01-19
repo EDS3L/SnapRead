@@ -53,7 +53,7 @@ public class InvoiceService {
 
             return invoice;
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
