@@ -5,6 +5,7 @@ import InvoiceTabel from './InvoiceTabel';
 import LoadingScreen from '../loading/LoadingScreen';
 import InvoicePopup from './InvoicePopup';
 import InvoiceErrorMessage from '../errors/InvoiceErrorMessage';
+import DetailsInvoice from './DetailsInvoice';
 
 function Invoice() {
   const [file, setFile] = useState(null);
@@ -46,6 +47,7 @@ function Invoice() {
   };
   return (
     <>
+      {/* <DetailsInvoice /> */}
       <InvoicePopup
         handleUpload={handleUpload}
         handleFileChange={handleFileChange}

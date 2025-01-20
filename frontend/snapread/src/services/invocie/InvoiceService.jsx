@@ -40,6 +40,22 @@ class InvoiceService {
       console.error(err.response.data || err);
     }
   }
+
+  async getUserInvoiceByID(username, id, token) {
+    try {
+      const response = await axios.get(
+        `/api/invoice/invoiceByID?username=${username}&id=${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (err) {
+      console.error(err.response.data || err);
+    }
+  }
 }
 
 export default InvoiceService;

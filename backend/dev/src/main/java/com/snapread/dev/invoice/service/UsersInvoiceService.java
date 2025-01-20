@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 @Service
 public class UsersInvoiceService {
@@ -56,11 +57,25 @@ public class UsersInvoiceService {
         }
     }
 
-    public Invoice getUsersInvoiceById(Long invoiceId) {
+    public Invoice getUsersInvoiceById(String username, Long invoiceId) {
         try {
-            return invoiceRepository.findById(invoiceId).orElseThrow(() -> new NoSuchElementException("Invoice with id " + invoiceId + " is not found"));
+            User user = userRepository.findByUsername(username).orElseThrow(() -> new NoSuchElementException("User with username " + username + " is not found"));
+            List<Invoice> invoices = user.getInvoices();
+            Invoice foundInvoice = null;
+
+            for (Invoice inv : invoices) {
+                if (inv.getId().equals(invoiceId)) {
+                    foundInvoice = inv;
+                    break;
+                }
+            }
+            if (foundInvoice == null) {
+                throw new NoSuchElementException("Invoice with id " + invoiceId + " not found for user " + username);
+            }
+
+            return foundInvoice;
         } catch (Exception e) {
-            throw new RuntimeException("Error getting invoice: " + e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

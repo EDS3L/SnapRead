@@ -47,9 +47,9 @@ public class InvoiceController {
     }
 
     @GetMapping("/invoiceByID")
-    public ResponseEntity<?> getInvoiceById(@RequestParam Long id) {
+    public ResponseEntity<?> getInvoiceById(@RequestParam String username, @RequestParam Long id) {
         try {
-            return ResponseEntity.ok(usersInvoiceService.getUsersInvoiceById(id));
+            return ResponseEntity.ok(usersInvoiceService.getUsersInvoiceById(username,id));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

@@ -25,7 +25,7 @@ function SideBar() {
           xxl:translate-x-0 xxl:relative xxl:block
         `}
       >
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full -z-10">
           <div>
             <div className="p-5 text-2xl flex items-center justify-between xxl:justify-start">
               <div className="flex items-center">
