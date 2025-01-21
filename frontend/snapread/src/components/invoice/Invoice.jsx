@@ -47,7 +47,7 @@ function Invoice() {
   };
   return (
     <>
-      {/* <DetailsInvoice /> */}
+      <DetailsInvoice />
       <InvoicePopup
         handleUpload={handleUpload}
         handleFileChange={handleFileChange}
