@@ -2,104 +2,79 @@ import { useEffect, useState } from 'react';
 import UserService from '../../services/user/UserService';
 import InvoiceService from '../../services/invocie/InvoiceService';
 
-function DetailsInvoice({ onClose }) {
+function DetailsInvoice() {
   const token = localStorage.getItem('token');
   const userService = new UserService();
   const invoiceService = new InvoiceService();
   const [invoice, setInvoice] = useState([]);
+  const [activeInput, setActiveInput] = useState(null);
 
-  
+  const handleEnable = (inputName) => {
+    setActiveInput(inputName);
+  };
+
   useEffect(() => {
     const fetchInvoice = async () => {
       if (!token) return;
       try {
         const username = userService.getUsernameFromToken(token);
-        const data = await invoiceService.getUserInvoiceByID('mati', 38, username);
-        setInvoice(data)
+        const data = await invoiceService.getUserInvoiceByID(
+          'mati',
+          3,
+          username
+        );
+        setInvoice(data);
       } catch (error) {
         console.error('Error fetching invoice:', error);
       }
     };
     fetchInvoice();
-    
   }, [token, userService, invoiceService]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-      <div className="relative bg-white max-w-7xl w-full mx-auto rounded shadow-lg overflow-hidden max-h-[90vh] overflow-y-auto">
-        <div className="flex justify-end p-3 bg-gray-100">
-          <button
-            onClick={onClose}
-            className="text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            X
-          </button>
+    <div className=" z-50 absolute w-full h-full bg-slate-600 bg-opacity-60 justify-center items-center flex">
+      <div
+        className="w-5/6 h-5/6 bg-slate-50 "
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex justify-end">
+          <i className="fa-solid fa-x p-3"></i>
         </div>
-        <div className="p-4 grid grid-cols-1 md:grid-cols-12 gap-4">
-          <div className="md:col-span-2 flex flex-col items-center gap-2">
-            <div className="w-full aspect-square bg-gray-300 rounded" />
-            <div className="w-full aspect-square bg-gray-300 rounded" />
-            <div className="w-full aspect-square bg-gray-300 rounded" />
+        <div className="grid grid-cols-1 md:grid-cols-6  w-full h-full bg-slate-200 p-3 gap-3">
+          <div className="w-full bg-slate-500  md:col-span-1 p-3 flex flex-col gap-3">
+            {/* załączniki pobierane, ilosc ustalana dynamicznie, po nacisnieciu wywietlamy je */}
+            <div className="w-full aspect-square bg-red-400 "></div>
+            <div className="w-full aspect-square bg-red-400"></div>
+            <div className="w-full aspect-square bg-red-400"></div>
           </div>
-          <div className="md:col-span-6 flex items-center justify-center max-h-full">
-            <div className="bg-gray-200 text-gray-500 h-full p-4 rounded text-center w-full">
-              <img className="max-h-full mx-auto" src={invoice.invoice_image} alt="" />
-            </div>
+          <div className="w-full bg-slate-500  md:col-span-3 p-3">
+            <iframe
+              className="h-full w-full"
+              src={invoice.invoice_image}
+            ></iframe>
           </div>
-          <div className="md:col-span-4 flex flex-col gap-4">
+          <div className="w-full bg-slate-500  md:col-span-2">
             <div>
-              <label className="block mb-1 font-semibold text-gray-700">
-                Numer faktury
+              <label onClick={() => handleEnable('invoice_number')}>
+                numer faktury
               </label>
               <input
                 type="text"
-                placeholder="Wpisz numer faktury..."
-                className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                value={invoice.invoice_number || ''}
+                disabled={activeInput !== 'invoice_number'}
               />
             </div>
             <div>
-              <label className="block mb-1 font-semibold text-gray-700">
-                Wystawca
+              <label onClick={() => handleEnable('supplier_name')}>
+                Nazwa firmy
               </label>
               <input
                 type="text"
-                placeholder="Nazwa wystawcy..."
-                className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
-              />
-            </div>
-            <div>
-              <label className="block mb-1 font-semibold text-gray-700">
-                Data
-              </label>
-              <input
-                type="date"
-                className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
-              />
-            </div>
-            <div>
-              <label className="block mb-1 font-semibold text-gray-700">
-                Opis
-              </label>
-              <textarea
-                rows={4}
-                placeholder="Dowolny opis..."
-                className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+                value={invoice.supplier_name || ''}
+                disabled={activeInput !== 'supplier_name'}
               />
             </div>
           </div>
-        </div>
-        <div className="flex justify-end p-4 bg-gray-50">
-          <button
-            onClick={onClose}
-            className="px-4 py-2 border rounded mr-2 hover:bg-gray-100 transition-colors"
-          >
-            Anuluj
-          </button>
-          <button
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-          >
-            Zapisz
-          </button>
         </div>
       </div>
     </div>
