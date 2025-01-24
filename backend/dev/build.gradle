@@ -39,6 +39,7 @@ dependencies {
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
 	implementation 'com.cloudinary:cloudinary-http5:2.0.0'
 	implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+	implementation 'com.itextpdf:itextpdf:5.5.13.3'
 
 }
 
