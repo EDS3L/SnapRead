@@ -84,6 +84,8 @@ function InvoiceTabel({ invoiceService, userService, handleInvoicePopup }) {
             </th>
             <th scope="col" className="px-6 py-3 whitespace-nowrap">
               Firma
+              {renderSortIcon('supplierName')}
+              <input type="text" onChange={""} />
             </th>
             <th scope="col" className="px-6 py-3 whitespace-nowrap">
               NIP
@@ -99,9 +101,6 @@ function InvoiceTabel({ invoiceService, userService, handleInvoicePopup }) {
             <th scope="col" className="px-6 py-3 whitespace-nowrap">
               Brutto
               {renderSortIcon('amountGross')}
-            </th>
-            <th scope="col" className="px-6 py-3 whitespace-nowrap">
-              Vat %
             </th>
             <th scope="col" className="px-6 py-3 whitespace-nowrap">
               Data dodania
@@ -150,12 +149,6 @@ function InvoiceTabel({ invoiceService, userService, handleInvoicePopup }) {
                 onClick={() => handleInvoicePopup(invoice.id)}
               >
                 {invoice.amountGross}
-              </td>
-              <td
-                className="px-6 py-4 whitespace-nowrap cursor-pointer"
-                onClick={() => handleInvoicePopup(invoice.id)}
-              >
-                {invoice.vatPercent}
               </td>
               <td
                 className="px-6 py-4 whitespace-nowrap cursor-pointer"

@@ -9,7 +9,7 @@ export const login = async (email, password, nav, setError) => {
       });
       if (response.status === 200) {
         localStorage.setItem('token', response.data.token);
-        nav('/dashboard');
+        nav('/invoices');
       }
     }
   } catch (e) {
