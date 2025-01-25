@@ -56,6 +56,23 @@ class InvoiceService {
       console.error(err.response.data || err);
     }
   }
+
+  async sortInvoice(direction, value, token) {
+    try {
+      const response = await axios.get(
+        `/api/invoice/sort?direction=${direction}&value=${value}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return response.data;
+    } catch (err) {
+      console.error(err.response.data || err);
+    }
+  }
 }
 
 export default InvoiceService;

@@ -15,10 +15,22 @@ function Invoice() {
   const [loading, setLoading] = useState(null);
   const token = localStorage.getItem('token');
   const [popup, setPopup] = useState(false);
+  const [invoicePopup, setinvoicePopup] = useState(false);
+  const [selectedInvoiceId, setSelectedInvoiceId] = useState(null);
   const [error, setError] = useState(null);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
+  };
+
+  const handleInvoicePopup = (invoiceId) => {
+    setSelectedInvoiceId(invoiceId);
+    setinvoicePopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setinvoicePopup(false);
+    setSelectedInvoiceId(null);
   };
 
   const handlePopup = () => {
@@ -49,7 +61,13 @@ function Invoice() {
 
   return (
     <>
-      <DetailsInvoice />
+      <DetailsInvoice
+        invoicePopup={invoicePopup}
+        setinvoicePopup={handleClosePopup}
+        invoiceId={selectedInvoiceId}
+        userService={userService}
+        invoiceService={invoiceService}
+      />
       <InvoicePopup
         handleUpload={handleUpload}
         handleFileChange={handleFileChange}
@@ -60,12 +78,6 @@ function Invoice() {
       {error && <InvoiceErrorMessage value={error} />}
       <div className="flex  flex-col md:w-[calc(100%-3.2rem)] xxl:w-[calc(100%-16rem)] w-[calc(100%-3.1rem)] p-3 ">
         <header className="flex flex-col p-4 w-full gap-5 bg-slate-100 rounded-3xl mb-3 ">
-          <div className="w-full">
-            <span className="text-gray-800 font-bold text-2xl">
-              Dashboard{' > '}Faktury
-            </span>
-          </div>
-
           <div className="flex justify-between mt-2 p-4">
             <span className="text-gray-800 font-extrabold text-3xl">
               Faktury
@@ -87,6 +99,7 @@ function Invoice() {
           <InvoiceTabel
             userService={userService}
             invoiceService={invoiceService}
+            handleInvoicePopup={handleInvoicePopup}
           />
         </main>
         <footer></footer>

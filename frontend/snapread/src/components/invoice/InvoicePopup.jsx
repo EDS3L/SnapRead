@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 const InvoicePopup = ({ handleUpload, handleFileChange, setPopup, popup }) => {
   const handlePopup = () => {
+    console.log([popup]);
     setPopup(!popup);
   };
 

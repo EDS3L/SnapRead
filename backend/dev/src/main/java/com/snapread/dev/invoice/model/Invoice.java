@@ -2,8 +2,6 @@ package com.snapread.dev.invoice.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.snapread.dev.auth.model.User;
 import jakarta.persistence.*;
 
@@ -16,30 +14,23 @@ public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @JsonProperty("invoice_number")
-    private String invoice_number;
-    @JsonProperty("supplier_name")
-    private String supplier_name;
-    @JsonProperty("supplier_nip")
-    private String supplier_nip;
-    private String supplier_address;
-    @JsonProperty("amount_net")
-    private String amount_net;
-    @JsonProperty("amount_vat")
-    private String amount_vat;
-    @JsonProperty("amount_gross")
-    private String amount_gross;
-    private List<String> vat_percent;
-    @JsonProperty("invoice_date")
-    private String invoice_date;
-    @JsonProperty("due_date")
-    private String due_date;
+
+    private String invoiceNumber;
+    private String supplierName;
+    private String supplierNip;
+    private String supplierAddress;
+    private String amountNet;
+    private String amountVat;
+    private String amountGross;
+    private List<String> vatPercent;
+    private String invoiceDate;
+    private String dueDate;
     private String description;
     @Lob
-    private String invoice_image;
-    private LocalDate created_at;
+    private String invoiceImage;
+    private LocalDate createdAt;
     @Lob
-    private byte[] attached_image;
+    private String attachedImage;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -50,16 +41,16 @@ public class Invoice {
     public Invoice() {
     }
 
-    public Invoice(String invoice_number, String supplier_name, String supplier_nip, String supplier_address, String amount_net, String amount_vat, String amount_gross, String invoice_date, String due_date, String description) {
-        this.invoice_number = invoice_number;
-        this.supplier_name = supplier_name;
-        this.supplier_nip = supplier_nip;
-        this.supplier_address = supplier_address;
-        this.amount_net = amount_net;
-        this.amount_vat = amount_vat;
-        this.amount_gross = amount_gross;
-        this.invoice_date = invoice_date;
-        this.due_date = due_date;
+    public Invoice(String invoiceNumber, String supplierName, String supplierNip, String supplierAddress, String amountNet, String amountVat, String amountGross, String invoiceDate, String dueDate, String description) {
+        this.invoiceNumber = invoiceNumber;
+        this.supplierName = supplierName;
+        this.supplierNip = supplierNip;
+        this.supplierAddress = supplierAddress;
+        this.amountNet = amountNet;
+        this.amountVat = amountVat;
+        this.amountGross = amountGross;
+        this.invoiceDate = invoiceDate;
+        this.dueDate = dueDate;
         this.description = description;
     }
 
@@ -71,84 +62,84 @@ public class Invoice {
         this.id = id;
     }
 
-    public String getInvoice_number() {
-        return invoice_number;
+    public String getInvoiceNumber() {
+        return invoiceNumber;
     }
 
-    public void setInvoice_number(String invoice_number) {
-        this.invoice_number = invoice_number;
+    public void setInvoiceNumber(String invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
     }
 
-    public String getSupplier_name() {
-        return supplier_name;
+    public String getSupplierName() {
+        return supplierName;
     }
 
-    public void setSupplier_name(String supplier_name) {
-        this.supplier_name = supplier_name;
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
     }
 
-    public String getSupplier_nip() {
-        return supplier_nip;
+    public String getSupplierNip() {
+        return supplierNip;
     }
 
-    public void setSupplier_nip(String supplier_nip) {
-        this.supplier_nip = supplier_nip;
+    public void setSupplierNip(String supplierNip) {
+        this.supplierNip = supplierNip;
     }
 
-    public String getSupplier_address() {
-        return supplier_address;
+    public String getSupplierAddress() {
+        return supplierAddress;
     }
 
-    public void setSupplier_address(String supplier_address) {
-        this.supplier_address = supplier_address;
+    public void setSupplierAddress(String supplierAddress) {
+        this.supplierAddress = supplierAddress;
     }
 
-    public String getAmount_net() {
-        return amount_net;
+    public String getAmountNet() {
+        return amountNet;
     }
 
-    public void setAmount_net(String amount_net) {
-        this.amount_net = amount_net;
+    public void setAmountNet(String amountNet) {
+        this.amountNet = amountNet;
     }
 
-    public String getAmount_vat() {
-        return amount_vat;
+    public String getAmountVat() {
+        return amountVat;
     }
 
-    public void setAmount_vat(String amount_vat) {
-        this.amount_vat = amount_vat;
+    public void setAmountVat(String amountVat) {
+        this.amountVat = amountVat;
     }
 
-    public String getAmount_gross() {
-        return amount_gross;
+    public String getAmountGross() {
+        return amountGross;
     }
 
-    public void setAmount_gross(String amount_gross) {
-        this.amount_gross = amount_gross;
+    public void setAmountGross(String amountGross) {
+        this.amountGross = amountGross;
     }
 
-    public List<String> getVat_percent() {
-        return vat_percent;
+    public List<String> getVatPercent() {
+        return vatPercent;
     }
 
-    public void setVat_percent(List<String> vat_percent) {
-        this.vat_percent = vat_percent;
+    public void setVatPercent(List<String> vatPercent) {
+        this.vatPercent = vatPercent;
     }
 
-    public String getInvoice_date() {
-        return invoice_date;
+    public String getInvoiceDate() {
+        return invoiceDate;
     }
 
-    public void setInvoice_date(String invoice_date) {
-        this.invoice_date = invoice_date;
+    public void setInvoiceDate(String invoiceDate) {
+        this.invoiceDate = invoiceDate;
     }
 
-    public String getDue_date() {
-        return due_date;
+    public String getDueDate() {
+        return dueDate;
     }
 
-    public void setDue_date(String due_date) {
-        this.due_date = due_date;
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
     }
 
     public String getDescription() {
@@ -159,28 +150,28 @@ public class Invoice {
         this.description = description;
     }
 
-    public String getInvoice_image() {
-        return invoice_image;
+    public String getInvoiceImage() {
+        return invoiceImage;
     }
 
-    public void setInvoice_image(String invoice_image) {
-        this.invoice_image = invoice_image;
+    public void setInvoiceImage(String invoiceImage) {
+        this.invoiceImage = invoiceImage;
     }
 
-    public LocalDate getCreated_at() {
-        return created_at;
+    public LocalDate getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(LocalDate created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public byte[] getAttached_image() {
-        return attached_image;
+    public String getAttachedImage() {
+        return attachedImage;
     }
 
-    public void setAttached_image(byte[] attached_image) {
-        this.attached_image = attached_image;
+    public void setAttachedImage(String attachedImage) {
+        this.attachedImage = attachedImage;
     }
 
     public User getUser() {

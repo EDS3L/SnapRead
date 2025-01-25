@@ -51,10 +51,10 @@ public class InvoiceService {
             JsonNode jsonNode = jsonService.parseJson(extractJson);
 
             Invoice invoice = objectMapper.treeToValue(jsonNode, Invoice.class);
-            invoice.setCreated_at(LocalDate.now());
+            invoice.setCreatedAt(LocalDate.now());
 
             String url = saveImg();
-            invoice.setInvoice_image(url);
+            invoice.setInvoiceImage(url);
 
             return invoice;
         } catch (Exception e) {
@@ -91,11 +91,8 @@ public class InvoiceService {
                 float scaleFactor = Math.min(documentWidth / img.getWidth(), documentHeight / img.getHeight());
                 img.scalePercent(scaleFactor * 100);
 
-                System.out.println(img.getColorspace());
-                img.setAlignment(Image.ALIGN_CENTER)  ;
+                img.setAlignment(Image.ALIGN_CENTER);
                 img.simplifyColorspace();
-                System.out.println(img.getColorspace());
-
 
                 doc.add(img);
 
