@@ -74,9 +74,9 @@ function InvoiceTabel({ invoiceService, userService, handleInvoicePopup }) {
   };
 
   return (
-    <div className="max-w-full h-full overflow-x-auto overflow-y-auto border border-slate-200 rounded-lg">
-      <table className="table-auto w-full min-w-max text-sm text-left rtl:text-right">
-        <thead className="uppercase bg-slate-100 sticky top-0">
+    <div className="max-w-full h-5/6 overflow-x-auto overflow-y-auto border border-slate-200 rounded-lg bg-white">
+      <table className="table-auto w-full min-w-max text-sm text-left rtl:text-right ">
+        <thead className="uppercase bg-slate-200 bg-opacity-100 sticky top-0 z-20 ">
           <tr>
             <th scope="col" className="px-6 py-3 whitespace-nowrap">
               ID
@@ -85,7 +85,7 @@ function InvoiceTabel({ invoiceService, userService, handleInvoicePopup }) {
             <th scope="col" className="px-6 py-3 whitespace-nowrap">
               Firma
               {renderSortIcon('supplierName')}
-              <input type="text" onChange={""} />
+              <input type="text" onChange={''} />
             </th>
             <th scope="col" className="px-6 py-3 whitespace-nowrap">
               NIP

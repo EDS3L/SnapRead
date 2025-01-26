@@ -32,8 +32,8 @@ function InvoiceData({ invoice, handleInputChange, handleInvoicePopup }) {
   };
 
   return (
-    <div className="w-full  p-3 h-[74.5vh] lg:col-span-2">
-      <div className="bg-white">
+    <div className="w-full  p-3 h-[74.5vh] lg:col-span-2 rounded-lg">
+      <div className="bg-white rounded-t-md">
         <h1 className="text-2xl p-3  text-slate-700 font-bold border-b border-slate-300 w-full text-center">
           Dane faktury
         </h1>
@@ -44,9 +44,9 @@ function InvoiceData({ invoice, handleInputChange, handleInvoicePopup }) {
             className="border-b border-slate-300 w-5/6  max-w-2xl flex lg:justify-center p-3 gap-4"
             key={label.name}
           >
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center ">
               <i
-                className="cursor-pointer pt- fa-solid fa-pen-to-square"
+                className="cursor-pointer pt- fa-solid fa-pen-to-square "
                 onClick={() => {
                   handleEnable(label.name, index);
                 }}
@@ -68,7 +68,7 @@ function InvoiceData({ invoice, handleInputChange, handleInvoicePopup }) {
           </div>
         ))}
       </div>
-      <div className="w-full h-1/5 bg-white flex gap-2 items-end justify-end p-3 ">
+      <div className="w-full h-1/5 bg-white flex gap-2 items-end justify-end p-3 rounded-md ">
         {invoice.invoice_image && (
           <a href={invoice.invoiceImage} target="_blank">
             <i className="fa-solid fa-file-pdf text-5xl hover:text-blue-600 cursor-pointer"></i>

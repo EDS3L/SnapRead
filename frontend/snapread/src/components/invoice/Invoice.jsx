@@ -7,6 +7,7 @@ import InvoicePopup from './InvoicePopup';
 import InvoiceErrorMessage from '../errors/InvoiceErrorMessage';
 
 import DetailsInvoice from './DetailsInvoice';
+import FilterInvoice from './FilterInvoice';
 
 function Invoice() {
   const [file, setFile] = useState(null);
@@ -44,6 +45,7 @@ function Invoice() {
 
     try {
       setLoading(true);
+      console.log(loading);
       const response = await invoiceService.createInvoice(
         file,
         userService.getUsernameFromToken(token),
@@ -76,8 +78,8 @@ function Invoice() {
       />
       {loading && <LoadingScreen value="Dodawanie fakutry" />}
       {error && <InvoiceErrorMessage value={error} />}
-      <div className="flex  flex-col md:w-[calc(100%-3.2rem)] xxl:w-[calc(100%-16rem)] w-[calc(100%-3.1rem)] p-3 ">
-        <header className="flex flex-col p-4 w-full gap-5 bg-slate-100 rounded-3xl mb-3 ">
+      <div className="flex  flex-col md:w-[calc(100%-3.2rem)] xxl:w-[calc(100%-16rem)] w-[calc(100%-3.1rem)] p-3 bg-slate-100 ">
+        <header className="flex flex-col p-4 w-full gap-5 bg-white rounded-3xl mb-3 ">
           <div className="flex justify-between mt-2 p-4">
             <span className="text-gray-800 font-extrabold text-3xl">
               Faktury
@@ -95,7 +97,8 @@ function Invoice() {
             </div>
           </div>
         </header>
-        <main className="flex-grow h-96">
+        <main className="flex flex-col flex-grow h-96 gap-1">
+          <FilterInvoice />
           <InvoiceTabel
             userService={userService}
             invoiceService={invoiceService}

@@ -15,14 +15,13 @@ function SideBar() {
     HOME: '/home',
     CAR: '/car',
     SUBSCRIPTION: '/subscription',
-  }
-
+  };
 
   return (
     <div className="relative">
       <div className="p-4 xxl:hidden">
         <button onClick={toggleSidebar} className="text-xl">
-          <i  className="fa-solid fa-bars"></i>
+          <i className="fa-solid fa-bars"></i>
         </button>
       </div>
 
@@ -30,16 +29,18 @@ function SideBar() {
         className={`fixed top-0 left-0 h-screen w-64 bg-white shadow-md
           transform transition-transform duration-300 ease-in-out z-50
           ${isOpen ? 'translate-x-0' : '-translate-x-full'}
-          xxl:translate-x-0 xxl:relative xxl:block
-        `}
+          xxl:translate-x-0 xxl:relative xxl:block`}
       >
         <div className="flex flex-col h-full -z-10">
           <div>
             <div className="p-5 text-2xl flex items-center justify-between xxl:justify-start">
-              <div  className="flex items-center">
-                <i onClick={toggleSidebar} className="fa-solid fa-bars cursor-pointer"></i>
+              <div className="flex items-center">
+                <i
+                  onClick={toggleSidebar}
+                  className="fa-solid fa-bars cursor-pointer"
+                ></i>
                 <Link to="/dashboard">
-                <span className="pl-5">SnapRead</span>
+                  <span className="pl-5">SnapRead</span>
                 </Link>
               </div>
 
@@ -50,26 +51,50 @@ function SideBar() {
 
             <div className="flex flex-col m-2 p-2 gap-3">
               <Link to="/invoices">
-                <div className={window.location.pathname == URLENDS.INVOICES ? "text-gray-500 text-xl w-full p-3 rounded-md bg-gray-200 cursor-default": 'text-gray-500 text-xl hover:bg-blue-600 hover:text-white w-full p-3 rounded-md '}>
+                <div
+                  className={
+                    window.location.pathname == URLENDS.INVOICES
+                      ? 'text-gray-500 text-xl w-full p-3 rounded-md bg-gray-200 cursor-default'
+                      : 'text-gray-500 text-xl hover:bg-blue-600 hover:text-white w-full p-3 rounded-md '
+                  }
+                >
                   <i className="fa-solid fa-file-invoice-dollar"></i>
-                  <span className='pl-5' >Invoice</span>
+                  <span className="pl-5">Invoice</span>
                 </div>
               </Link>
               <Link to="/home">
-              <div className={window.location.pathname == URLENDS.HOME ? "text-gray-500 text-xl w-full p-3 rounded-md bg-gray-200 cursor-default": 'text-gray-500 text-xl hover:bg-blue-600 hover:text-white w-full p-3 rounded-md '}>
-              <i className="fa-solid fa-house"></i>
+                <div
+                  className={
+                    window.location.pathname == URLENDS.HOME
+                      ? 'text-gray-500 text-xl w-full p-3 rounded-md bg-gray-200 cursor-default'
+                      : 'text-gray-500 text-xl hover:bg-blue-600 hover:text-white w-full p-3 rounded-md '
+                  }
+                >
+                  <i className="fa-solid fa-house"></i>
                   <span className="pl-5">Home</span>
                 </div>
               </Link>
               <Link to="/car">
-              <div className={window.location.pathname == URLENDS.CAR ? "text-gray-500 text-xl w-full p-3 rounded-md bg-gray-200 cursor-default": 'text-gray-500 text-xl hover:bg-blue-600 hover:text-white w-full p-3 rounded-md '}>
-              <i className="fa-solid fa-car"></i>
+                <div
+                  className={
+                    window.location.pathname == URLENDS.CAR
+                      ? 'text-gray-500 text-xl w-full p-3 rounded-md bg-gray-200 cursor-default'
+                      : 'text-gray-500 text-xl hover:bg-blue-600 hover:text-white w-full p-3 rounded-md '
+                  }
+                >
+                  <i className="fa-solid fa-car"></i>
                   <span className="pl-5">Car</span>
                 </div>
               </Link>
               <Link to="/subscription">
-              <div className={window.location.pathname == URLENDS.SUBSCRIPTION ? "text-gray-500 text-xl w-full p-3 rounded-md bg-gray-200 cursor-default": 'text-gray-500 text-xl hover:bg-blue-600 hover:text-white w-full p-3 rounded-md '}>
-              <i className="fa-regular fa-credit-card"></i>
+                <div
+                  className={
+                    window.location.pathname == URLENDS.SUBSCRIPTION
+                      ? 'text-gray-500 text-xl w-full p-3 rounded-md bg-gray-200 cursor-default'
+                      : 'text-gray-500 text-xl hover:bg-blue-600 hover:text-white w-full p-3 rounded-md '
+                  }
+                >
+                  <i className="fa-regular fa-credit-card"></i>
                   <span className="pl-5">Subscription</span>
                 </div>
               </Link>
@@ -105,7 +130,7 @@ function SideBar() {
 
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-30 xxl:hidden"
+          className="fixed inset-0 bg-black bg-opacity-30 z-40 xxl:hidden"
           onClick={toggleSidebar}
         ></div>
       )}
