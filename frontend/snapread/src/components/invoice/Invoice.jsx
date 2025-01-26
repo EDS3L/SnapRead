@@ -98,7 +98,7 @@ function Invoice() {
           </div>
         </header>
         <main className="flex flex-col flex-grow h-96 gap-1">
-          <FilterInvoice />
+          <FilterInvoice invoiceService={invoiceService} />
           <InvoiceTabel
             userService={userService}
             invoiceService={invoiceService}

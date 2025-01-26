@@ -5,7 +5,7 @@ import com.snapread.dev.invoice.repository.InvoiceRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -20,7 +20,7 @@ public class InvoiceSorting {
 
 
     public List<Invoice> invoiceByID(Sort.Direction direction, String value) {
-        if(direction == Sort.Direction.ASC || direction == Sort.Direction.DESC) {
+        if (direction == Sort.Direction.ASC || direction == Sort.Direction.DESC) {
             if (value != null && !value.isEmpty()) {
                 return invoiceRepository.findAll(Sort.by(direction, value));
             } else {
@@ -30,7 +30,20 @@ public class InvoiceSorting {
         throw new IllegalArgumentException("Invalid sort direction: " + direction);
     }
 
-    public List<Invoice> sortCompanyByName(String value) {
-        return invoiceRepository.findBySupplierNameContainingIgnoreCaseOrderBySupplierNameAsc(value);
+    public List<Invoice> sortCompanyByName(LocalDate startDate, LocalDate endDate, String supplierName, String supplierNip) {
+
+
+        if (endDate.isBefore(startDate)) {
+            throw new IllegalArgumentException("Start date cannot be after end date");
+        }
+
+        if (!supplierName.isEmpty()) {
+            if (!supplierNip.matches("^[a-zA-Z0-9-]+$")) {
+                throw new IllegalArgumentException("Nip cannot contain special characters");
+            }
+        }
+
+
+        return invoiceRepository.findByCreatedAtBetweenAndSupplierNameContainingIgnoreCaseAndSupplierNipContainingIgnoreCaseOrderBySupplierNameAsc(startDate, endDate, supplierName, supplierNip);
     }
 }

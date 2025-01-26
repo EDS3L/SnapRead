@@ -73,6 +73,23 @@ class InvoiceService {
       console.error(err.response.data || err);
     }
   }
+
+  async filterInvoice(company, nip, startDate, endDate, token) {
+    try {
+      const response = await axios.get(
+        `/api/invoice/sort/company?supplierName=${company}&supplierNip=${nip}&startDate=${startDate}&endDate=${endDate}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return response.data;
+    } catch (err) {
+      console.error(err.response.data || err);
+    }
+  }
 }
 
 export default InvoiceService;
