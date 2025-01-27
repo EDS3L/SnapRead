@@ -1,6 +1,8 @@
 package com.snapread.dev.invoice.controller;
 
+import com.snapread.dev.invoice.service.InvoiceService;
 import com.snapread.dev.invoice.service.InvoiceSorting;
+import com.snapread.dev.invoice.service.UsersInvoiceService;
 import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +19,11 @@ public class SortInvoiceController {
 
 
     private final InvoiceSorting invoiceSorting;
+    private final UsersInvoiceService usersInvoiceService;
 
-    public SortInvoiceController(InvoiceSorting invoiceSorting) {
+    public SortInvoiceController(InvoiceSorting invoiceSorting, UsersInvoiceService usersInvoiceService) {
         this.invoiceSorting = invoiceSorting;
+        this.usersInvoiceService = usersInvoiceService;
     }
 
     @GetMapping("")
@@ -36,10 +40,16 @@ public class SortInvoiceController {
             @RequestParam(required = false, defaultValue = "") String supplierName,
             @RequestParam(required = false, defaultValue = "") String supplierNip,
             @RequestParam(required = false, defaultValue = "2025-01-01") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-            @RequestParam(required = false, defaultValue = "#{T(java.time.LocalDate).now()}") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+            @RequestParam(required = false, defaultValue = "#{T(java.time.LocalDate).now()}") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+            @RequestParam String username)
+    {
 
         try {
-            return ResponseEntity.ok(invoiceSorting.sortCompanyByName(startDate, endDate, supplierName, supplierNip));
+            if(supplierName == null && supplierNip == null && startDate == null && endDate == null) {
+                return ResponseEntity.ok(usersInvoiceService.getAllUsersInvoices(username));
+            } else {
+                return ResponseEntity.ok(invoiceSorting.sortCompanyByName(startDate, endDate, supplierName, supplierNip));
+            }
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

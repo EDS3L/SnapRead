@@ -74,10 +74,16 @@ class InvoiceService {
     }
   }
 
-  async filterInvoice(company, nip, startDate, endDate, token) {
+  async filterInvoice(company, nip, startDate, endDate, username, token) {
     try {
+      const defaultStartDate = '2025-01-01';
+      const defaultEndDate = new Date().toISOString().split('T')[0];
       const response = await axios.get(
-        `/api/invoice/sort/company?supplierName=${company}&supplierNip=${nip}&startDate=${startDate}&endDate=${endDate}`,
+        `/api/invoice/sort/company?supplierName=${company || ''}&supplierNip=${
+          nip || ''
+        }&startDate=${startDate || defaultStartDate}&endDate=${
+          endDate || defaultEndDate
+        }&username=${username}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

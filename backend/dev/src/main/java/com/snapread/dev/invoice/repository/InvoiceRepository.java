@@ -12,4 +12,5 @@ public interface InvoiceRepository extends JpaRepository<Invoice,Long> {
     List<Invoice> findByCreatedAtBetweenAndSupplierNameContainingIgnoreCaseAndSupplierNipContainingIgnoreCaseOrderBySupplierNameAsc(
             LocalDate startDate, LocalDate endDate, String supplierName, String supplierNip);
 
+    List<Invoice> findByCreatedAtBetweenAndSupplierNameContainingIgnoreCaseOrderBySupplierNameAsc(LocalDate startDate, LocalDate endDate, String supplierName);
 }

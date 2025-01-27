@@ -1,8 +1,14 @@
 import { useRef, useState } from 'react';
 import Datepicker from 'react-tailwindcss-datepicker';
 import HelperService from '../../services/invocie/HelperService';
+import PropTypes from 'prop-types';
 
-function FilterInvoice({ invoiceService }) {
+function FilterInvoice({
+  invoiceService,
+  setInvoices,
+  userService,
+  setSortField,
+}) {
   const [value, setValue] = useState({
     startDate: null,
     endDate: null,
@@ -15,22 +21,29 @@ function FilterInvoice({ invoiceService }) {
   const companyRef = useRef(null);
 
   const onClear = () => {
-    nipRef.current.value = '';
-    companyRef.current.value = '';
+    nipRef.current.value = null;
+    setNip(null);
+    companyRef.current.value = null;
+    setCompanyName(null);
     setValue({ startDate: null, endDate: null });
+    setSortField(null);
   };
 
   const handleFilter = async () => {
     const token = localStorage.getItem('token');
+    const username = userService.getUsernameFromToken(token);
+    let localSortField = null;
+    setSortField(localSortField);
     const response = await invoiceService.filterInvoice(
       companyName,
       nip,
       helperService.getFormatedDate(value.startDate),
       helperService.getFormatedDate(value.endDate),
+      username,
       token
     );
-
     console.log(response);
+    setInvoices(response);
   };
 
   return (
@@ -89,5 +102,14 @@ function FilterInvoice({ invoiceService }) {
     </div>
   );
 }
+
+FilterInvoice.propTypes = {
+  invoiceService: PropTypes.object.isRequired,
+  setInvoices: PropTypes.func.isRequired,
+  userService: PropTypes.shape({
+    getUsernameFromToken: PropTypes.func.isRequired,
+  }).isRequired,
+  setSortField: PropTypes.func,
+};
 
 export default FilterInvoice;

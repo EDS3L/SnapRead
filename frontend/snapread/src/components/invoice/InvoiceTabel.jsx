@@ -1,11 +1,18 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-function InvoiceTabel({ invoiceService, userService, handleInvoicePopup }) {
+function InvoiceTabel({
+  invoiceService,
+  userService,
+  handleInvoicePopup,
+  setInvoices,
+  invoices,
+  sortField,
+  setSortField,
+  sortDirection,
+  setSortDirection,
+}) {
   const token = localStorage.getItem('token');
-  const [invoices, setInvoices] = useState([]);
-  const [sortField, setSortField] = useState(null);
-  const [sortDirection, setSortDirection] = useState('ASC');
 
   useEffect(() => {
     const fetchInvoices = async () => {
@@ -18,10 +25,10 @@ function InvoiceTabel({ invoiceService, userService, handleInvoicePopup }) {
       }
     };
 
-    if (token) {
+    if (token && invoices.length === 0) {
       fetchInvoices();
     }
-  }, [invoiceService, userService, token]);
+  }, [invoiceService, userService, token, setInvoices, invoices.length]);
 
   useEffect(() => {
     const fetchSortedInvoices = async () => {
@@ -40,7 +47,7 @@ function InvoiceTabel({ invoiceService, userService, handleInvoicePopup }) {
     };
 
     fetchSortedInvoices();
-  }, [invoiceService, sortDirection, sortField, token]);
+  }, [invoiceService, sortDirection, sortField, token, setInvoices]);
 
   const handleSort = (field) => {
     if (sortField === field) {
@@ -172,6 +179,12 @@ InvoiceTabel.propTypes = {
     getUsernameFromToken: PropTypes.func.isRequired,
   }).isRequired,
   handleInvoicePopup: PropTypes.func.isRequired,
+  setInvoices: PropTypes.func.isRequired,
+  invoices: PropTypes.array.isRequired,
+  sortField: PropTypes.string,
+  setSortField: PropTypes.func.isRequired,
+  sortDirection: PropTypes.string.isRequired,
+  setSortDirection: PropTypes.func.isRequired,
 };
 
 export default InvoiceTabel;

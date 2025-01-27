@@ -1,5 +1,8 @@
 class HelperService {
   getFormatedDate(value) {
+    if (!value) {
+      return '';
+    }
     const year = value.getFullYear();
     const month = String(value.getMonth() + 1).padStart(2, '0');
     const day = String(value.getDate()).padStart(2, '0');

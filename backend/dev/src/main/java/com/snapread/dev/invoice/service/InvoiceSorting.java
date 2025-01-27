@@ -36,14 +36,12 @@ public class InvoiceSorting {
         if (endDate.isBefore(startDate)) {
             throw new IllegalArgumentException("Start date cannot be after end date");
         }
-
-        if (!supplierName.isEmpty()) {
-            if (!supplierNip.matches("^[a-zA-Z0-9-]+$")) {
-                throw new IllegalArgumentException("Nip cannot contain special characters");
-            }
+        if (supplierNip == null || supplierNip.isEmpty()) {
+            return invoiceRepository.findByCreatedAtBetweenAndSupplierNameContainingIgnoreCaseOrderBySupplierNameAsc(
+                    startDate, endDate, supplierName);
         }
 
-
-        return invoiceRepository.findByCreatedAtBetweenAndSupplierNameContainingIgnoreCaseAndSupplierNipContainingIgnoreCaseOrderBySupplierNameAsc(startDate, endDate, supplierName, supplierNip);
+        return invoiceRepository.findByCreatedAtBetweenAndSupplierNameContainingIgnoreCaseAndSupplierNipContainingIgnoreCaseOrderBySupplierNameAsc(
+                startDate, endDate, supplierName, supplierNip);
     }
 }

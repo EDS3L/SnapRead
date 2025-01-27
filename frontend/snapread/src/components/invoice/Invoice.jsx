@@ -19,6 +19,9 @@ function Invoice() {
   const [invoicePopup, setinvoicePopup] = useState(false);
   const [selectedInvoiceId, setSelectedInvoiceId] = useState(null);
   const [error, setError] = useState(null);
+  const [invoices, setInvoices] = useState([]);
+  const [sortField, setSortField] = useState(null);
+  const [sortDirection, setSortDirection] = useState('ASC');
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -98,11 +101,22 @@ function Invoice() {
           </div>
         </header>
         <main className="flex flex-col flex-grow h-96 gap-1">
-          <FilterInvoice invoiceService={invoiceService} />
+          <FilterInvoice
+            invoiceService={invoiceService}
+            setInvoices={setInvoices}
+            userService={userService}
+            setSortField={setSortField}
+          />
           <InvoiceTabel
             userService={userService}
             invoiceService={invoiceService}
             handleInvoicePopup={handleInvoicePopup}
+            setInvoices={setInvoices}
+            invoices={invoices}
+            sortField={sortField}
+            setSortField={setSortField}
+            sortDirection={sortDirection}
+            setSortDirection={setSortDirection}
           />
         </main>
         <footer></footer>
