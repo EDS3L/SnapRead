@@ -21,13 +21,15 @@ function FilterInvoice({
   const companyRef = useRef(null);
 
   const onClear = () => {
-    nipRef.current.value = null;
-    setNip(null);
-    companyRef.current.value = null;
-    setCompanyName(null);
-    setValue({ startDate: null, endDate: null });
+    nipRef.current.value = "";
+    setNip("");
+    companyRef.current.value = "";
+    setCompanyName("");
+    setValue({ startDate: "", endDate: "" });
     setSortField(null);
   };
+
+  
 
   //do kasacji, funkcja łącząca funkcje do wywołania
   
