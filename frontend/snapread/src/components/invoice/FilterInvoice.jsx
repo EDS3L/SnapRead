@@ -29,6 +29,12 @@ function FilterInvoice({
     setSortField(null);
   };
 
+  //do kasacji, funkcja łącząca funkcje do wywołania
+  
+  // const combineFunctions = (...fns) => () => { 
+  //   fns.forEach(fn => fn()); 
+  // }; 
+
   const handleFilter = async () => {
     const token = localStorage.getItem('token');
     const username = userService.getUsernameFromToken(token);
