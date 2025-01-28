@@ -19,26 +19,36 @@ function FilterInvoice({
 
   const nipRef = useRef(null);
   const companyRef = useRef(null);
+  const token = localStorage.getItem('token');
 
-  const onClear = () => {
-    nipRef.current.value = "";
-    setNip("");
-    companyRef.current.value = "";
-    setCompanyName("");
-    setValue({ startDate: "", endDate: "" });
-    setSortField(null);
+  const fetchInvoices = async () => {
+    try {
+      const username = userService.getUsernameFromToken(token);
+      const data = await invoiceService.getUserInvoice(username, token);
+      setInvoices(data);
+    } catch (error) {
+      console.error('Error fetching invoices:', error);
+    }
   };
 
-  
+  const onClear = () => {
+    nipRef.current.value = '';
+    setNip('');
+    companyRef.current.value = '';
+    setCompanyName('');
+    setValue({ startDate: null, endDate: null });
+    setSortField(null);
+
+    fetchInvoices();
+  };
 
   //do kasacji, funkcja łącząca funkcje do wywołania
-  
-  // const combineFunctions = (...fns) => () => { 
-  //   fns.forEach(fn => fn()); 
-  // }; 
+
+  // const combineFunctions = (...fns) => () => {
+  //   fns.forEach(fn => fn());
+  // };
 
   const handleFilter = async () => {
-    const token = localStorage.getItem('token');
     const username = userService.getUsernameFromToken(token);
     let localSortField = null;
     setSortField(localSortField);

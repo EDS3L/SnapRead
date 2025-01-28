@@ -41,7 +41,6 @@ function InvoiceTabel({
             token
           );
           setInvoices(data);
-
         } catch (err) {
           console.error(err.response?.data || err);
         }
@@ -49,7 +48,7 @@ function InvoiceTabel({
     };
 
     fetchSortedInvoices();
-  }, [invoiceService, sortDirection, sortField, token, setInvoices]);
+  }, [invoices, invoiceService, sortDirection, sortField, token, setInvoices]);
 
   const handleSort = (field) => {
     if (sortField === field) {
