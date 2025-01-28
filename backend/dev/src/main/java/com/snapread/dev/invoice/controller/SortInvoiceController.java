@@ -1,17 +1,16 @@
 package com.snapread.dev.invoice.controller;
 
+import com.snapread.dev.invoice.model.Invoice;
 import com.snapread.dev.invoice.service.InvoiceService;
 import com.snapread.dev.invoice.service.InvoiceSorting;
 import com.snapread.dev.invoice.service.UsersInvoiceService;
 import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/invoice/sort")
@@ -26,10 +25,10 @@ public class SortInvoiceController {
         this.usersInvoiceService = usersInvoiceService;
     }
 
-    @GetMapping("")
-    public ResponseEntity<?> sortById(@RequestParam Sort.Direction direction, @RequestParam String value) {
+    @PostMapping("")
+    public ResponseEntity<?> sortById(@RequestBody List<Invoice> invoiceList, @RequestParam Sort.Direction direction, @RequestParam String value) {
         try {
-            return ResponseEntity.ok(invoiceSorting.invoiceByID(direction, value));
+            return ResponseEntity.ok(invoiceSorting.sortASCDSC(invoiceList, direction, value));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

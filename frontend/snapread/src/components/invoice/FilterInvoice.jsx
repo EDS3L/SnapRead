@@ -50,7 +50,6 @@ function FilterInvoice({
       username,
       token
     );
-    console.log(response);
     setInvoices(response);
   };
 

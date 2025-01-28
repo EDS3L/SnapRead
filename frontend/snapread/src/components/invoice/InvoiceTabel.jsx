@@ -35,11 +35,13 @@ function InvoiceTabel({
       if (sortField) {
         try {
           const data = await invoiceService.sortInvoice(
+            invoices,
             sortDirection,
             sortField,
             token
           );
           setInvoices(data);
+
         } catch (err) {
           console.error(err.response?.data || err);
         }

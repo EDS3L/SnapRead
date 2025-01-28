@@ -57,20 +57,24 @@ class InvoiceService {
     }
   }
 
-  async sortInvoice(direction, value, token) {
+  async sortInvoice(invoices, direction, value, token) {
     try {
-      const response = await axios.get(
-        `/api/invoice/sort?direction=${direction}&value=${value}`,
+      const response = await axios.post(
+        `/api/invoice/sort`,
+        invoices, 
         {
+          params: {
+            direction,
+            value,
+          },
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-
       return response.data;
     } catch (err) {
-      console.error(err.response.data || err);
+      console.error(err.response?.data || err);
     }
   }
 
