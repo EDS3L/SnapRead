@@ -59,7 +59,7 @@ function Invoice() {
       console.log(response);
       toast.success("Faktura została dodana");
     } catch (error) {
-      console.error("Błąd:", error);
+      toast.error("Błąd ", error);
     } finally {
       setTimeout(() => {
         window.location.reload();
@@ -82,7 +82,13 @@ function Invoice() {
         popup={popup}
         setPopup={setPopup}
       />
-      {loading && <Spinner />}
+      {loading && (
+        <Spinner
+          loading={loading}
+          messageA="Czytam informacje na fakturze"
+          messageB="Zapisuje dane w systemie"
+        />
+      )}
       {error && <InvoiceErrorMessage value={error} />}
       <div className="flex  flex-col md:w-[calc(100%-3.2rem)] xxl:w-[calc(100%-16rem)] w-[calc(100%-3.1rem)] p-3 bg-slate-100 ">
         <header className="flex flex-col p-4 w-full gap-5 bg-white rounded-3xl mb-3 ">
