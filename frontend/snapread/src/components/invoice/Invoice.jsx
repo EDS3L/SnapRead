@@ -1,27 +1,27 @@
-import { useState } from 'react';
-import InvoiceService from '../../services/invocie/InvoiceService';
-import UserService from '../../services/user/UserService';
-import InvoiceTabel from './InvoiceTabel';
-import LoadingScreen from '../loading/LoadingScreen';
-import InvoicePopup from './InvoicePopup';
-import InvoiceErrorMessage from '../errors/InvoiceErrorMessage';
-
-import DetailsInvoice from './DetailsInvoice';
-import FilterInvoice from './FilterInvoice';
+import { useState } from "react";
+import InvoiceService from "../../services/invocie/InvoiceService";
+import UserService from "../../services/user/UserService";
+import InvoiceTabel from "./InvoiceTabel";
+import Spinner from "../loading/Spinner";
+import InvoicePopup from "./InvoicePopup";
+import InvoiceErrorMessage from "../errors/InvoiceErrorMessage";
+import { toast } from "react-toastify";
+import DetailsInvoice from "./DetailsInvoice";
+import FilterInvoice from "./FilterInvoice";
 
 function Invoice() {
   const [file, setFile] = useState(null);
   const invoiceService = new InvoiceService();
   const userService = new UserService();
   const [loading, setLoading] = useState(null);
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const [popup, setPopup] = useState(false);
   const [invoicePopup, setinvoicePopup] = useState(false);
   const [selectedInvoiceId, setSelectedInvoiceId] = useState(null);
   const [error, setError] = useState(null);
   const [invoices, setInvoices] = useState([]);
   const [sortField, setSortField] = useState(null);
-  const [sortDirection, setSortDirection] = useState('ASC');
+  const [sortDirection, setSortDirection] = useState("ASC");
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -48,6 +48,7 @@ function Invoice() {
 
     try {
       setLoading(true);
+      setPopup(false);
       console.log(loading);
       const response = await invoiceService.createInvoice(
         file,
@@ -56,11 +57,13 @@ function Invoice() {
         setError
       );
       console.log(response);
-      // todo: dodać jakieś ładne powiadomienie o dodaniu faktury
+      toast.success("Faktura została dodana");
     } catch (error) {
-      console.error('Błąd:', error);
+      console.error("Błąd:", error);
     } finally {
-      setLoading(false);
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     }
   };
 
@@ -79,7 +82,7 @@ function Invoice() {
         popup={popup}
         setPopup={setPopup}
       />
-      {loading && <LoadingScreen value="Dodawanie fakutry" />}
+      {loading && <Spinner />}
       {error && <InvoiceErrorMessage value={error} />}
       <div className="flex  flex-col md:w-[calc(100%-3.2rem)] xxl:w-[calc(100%-16rem)] w-[calc(100%-3.1rem)] p-3 bg-slate-100 ">
         <header className="flex flex-col p-4 w-full gap-5 bg-white rounded-3xl mb-3 ">

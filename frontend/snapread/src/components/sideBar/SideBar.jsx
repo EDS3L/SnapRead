@@ -1,20 +1,19 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { logout } from '../../services/dashboard/logout';
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { logout } from "../../services/dashboard/logout";
 
 function SideBar() {
   const nav = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
+  //Auto sets active on NavLink, css styles inside
+  const linkClass = ({ isActive }) =>
+    isActive
+      ? "text-gray-500 text-xl w-full p-3 rounded-md bg-gray-200 cursor-default"
+      : "text-gray-500 text-xl hover:bg-blue-600 hover:text-white w-full p-3 rounded-md ";
+
   const toggleSidebar = () => {
     setIsOpen((prev) => !prev);
-  };
-
-  const URLENDS = {
-    INVOICES: '/invoices',
-    HOME: '/home',
-    CAR: '/car',
-    SUBSCRIPTION: '/subscription',
   };
 
   return (
@@ -28,7 +27,7 @@ function SideBar() {
       <div
         className={`fixed top-0 left-0 h-screen w-64 bg-white shadow-md
           transform transition-transform duration-300 ease-in-out z-50
-          ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+          ${isOpen ? "translate-x-0" : "-translate-x-full"}
           xxl:translate-x-0 xxl:relative xxl:block`}
       >
         <div className="flex flex-col h-full -z-10">
@@ -39,9 +38,9 @@ function SideBar() {
                   onClick={toggleSidebar}
                   className="fa-solid fa-bars cursor-pointer"
                 ></i>
-                <Link to="/dashboard">
+                <NavLink to="/dashboard">
                   <span className="pl-5">SnapRead</span>
-                </Link>
+                </NavLink>
               </div>
 
               <button onClick={toggleSidebar} className="text-xl xxl:hidden">
@@ -50,66 +49,42 @@ function SideBar() {
             </div>
 
             <div className="flex flex-col m-2 p-2 gap-3">
-              <Link to="/invoices">
-                <div
-                  className={
-                    window.location.pathname == URLENDS.INVOICES
-                      ? 'text-gray-500 text-xl w-full p-3 rounded-md bg-gray-200 cursor-default'
-                      : 'text-gray-500 text-xl hover:bg-blue-600 hover:text-white w-full p-3 rounded-md '
-                  }
-                >
+              <NavLink className={linkClass} to="/invoices">
+                <div>
                   <i className="fa-solid fa-file-invoice-dollar"></i>
                   <span className="pl-5">Invoice</span>
                 </div>
-              </Link>
-              <Link to="/home">
-                <div
-                  className={
-                    window.location.pathname == URLENDS.HOME
-                      ? 'text-gray-500 text-xl w-full p-3 rounded-md bg-gray-200 cursor-default'
-                      : 'text-gray-500 text-xl hover:bg-blue-600 hover:text-white w-full p-3 rounded-md '
-                  }
-                >
+              </NavLink>
+              <NavLink className={linkClass} to="/home">
+                <div>
                   <i className="fa-solid fa-house"></i>
                   <span className="pl-5">Home</span>
                 </div>
-              </Link>
-              <Link to="/car">
-                <div
-                  className={
-                    window.location.pathname == URLENDS.CAR
-                      ? 'text-gray-500 text-xl w-full p-3 rounded-md bg-gray-200 cursor-default'
-                      : 'text-gray-500 text-xl hover:bg-blue-600 hover:text-white w-full p-3 rounded-md '
-                  }
-                >
+              </NavLink>
+              <NavLink className={linkClass} to="/car">
+                <div>
                   <i className="fa-solid fa-car"></i>
                   <span className="pl-5">Car</span>
                 </div>
-              </Link>
-              <Link to="/subscription">
-                <div
-                  className={
-                    window.location.pathname == URLENDS.SUBSCRIPTION
-                      ? 'text-gray-500 text-xl w-full p-3 rounded-md bg-gray-200 cursor-default'
-                      : 'text-gray-500 text-xl hover:bg-blue-600 hover:text-white w-full p-3 rounded-md '
-                  }
-                >
+              </NavLink>
+              <NavLink className={linkClass} to="/subscription">
+                <div>
                   <i className="fa-regular fa-credit-card"></i>
                   <span className="pl-5">Subscription</span>
                 </div>
-              </Link>
-              <Link to="/receipt">
-                <div className="text-gray-500 text-xl hover:bg-blue-600 hover:text-white w-full p-3 rounded-md">
+              </NavLink>
+              <NavLink className={linkClass} to="/receipt">
+                <div>
                   <i className="fa-solid fa-receipt"></i>
                   <span className="pl-5">Receipt</span>
                 </div>
-              </Link>
-              <Link to="/shopping-list">
-                <div className="text-gray-500 text-xl hover:bg-blue-600 hover:text-white w-full p-3 rounded-md">
+              </NavLink>
+              <NavLink className={linkClass} to="/shopping-list">
+                <div>
                   <i className="fa-solid fa-carrot"></i>
                   <span className="pl-5">Shopping list</span>
                 </div>
-              </Link>
+              </NavLink>
             </div>
           </div>
 
