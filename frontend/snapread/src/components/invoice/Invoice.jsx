@@ -1,27 +1,27 @@
-import { useState } from "react";
-import InvoiceService from "../../services/invocie/InvoiceService";
-import UserService from "../../services/user/UserService";
-import InvoiceTabel from "./InvoiceTabel";
-import Spinner from "../loading/Spinner";
-import InvoicePopup from "./InvoicePopup";
-import InvoiceErrorMessage from "../errors/InvoiceErrorMessage";
-import { toast } from "react-toastify";
-import DetailsInvoice from "./DetailsInvoice";
-import FilterInvoice from "./FilterInvoice";
+import { useState } from 'react';
+import InvoiceService from '../../services/invocie/InvoiceService';
+import UserService from '../../services/user/UserService';
+import InvoiceTabel from './InvoiceTabel';
+import Spinner from '../loading/Spinner';
+import InvoicePopup from './InvoicePopup';
+import InvoiceErrorMessage from '../errors/InvoiceErrorMessage';
+import { toast } from 'react-toastify';
+import DetailsInvoice from './DetailsInvoice';
+import FilterInvoice from './FilterInvoice';
 
 function Invoice() {
   const [file, setFile] = useState(null);
   const invoiceService = new InvoiceService();
   const userService = new UserService();
   const [loading, setLoading] = useState(null);
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   const [popup, setPopup] = useState(false);
   const [invoicePopup, setinvoicePopup] = useState(false);
   const [selectedInvoiceId, setSelectedInvoiceId] = useState(null);
   const [error, setError] = useState(null);
   const [invoices, setInvoices] = useState([]);
   const [sortField, setSortField] = useState(null);
-  const [sortDirection, setSortDirection] = useState("ASC");
+  const [sortDirection, setSortDirection] = useState('ASC');
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -57,13 +57,14 @@ function Invoice() {
         setError
       );
       console.log(response);
-      toast.success("Faktura została dodana");
     } catch (error) {
-      toast.error("Błąd ", error);
+      toast.error('Błąd ', error);
     } finally {
       setTimeout(() => {
         window.location.reload();
       }, 3000);
+      setLoading(false);
+      toast.success('Faktura została dodana');
     }
   };
 

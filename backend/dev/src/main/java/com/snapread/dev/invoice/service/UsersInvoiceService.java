@@ -2,6 +2,7 @@ package com.snapread.dev.invoice.service;
 
 import com.snapread.dev.auth.model.User;
 import com.snapread.dev.auth.repository.UserRepository;
+import com.snapread.dev.invoice.controller.request.InvoiceDTO;
 import com.snapread.dev.invoice.model.Invoice;
 import com.snapread.dev.invoice.repository.InvoiceRepository;
 import jakarta.transaction.Transactional;
@@ -74,6 +75,32 @@ public class UsersInvoiceService {
             }
 
             return foundInvoice;
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+
+    public Invoice editInvoice(InvoiceDTO invoiceDTO) {
+        try {
+            Invoice invoice = invoiceRepository.findById(invoiceDTO.getId()).orElseThrow(() -> new NoSuchElementException("Invoice with id " + invoiceDTO.getId() + " not found"));
+
+            invoice.setSupplierName(invoiceDTO.getSupplierName());
+            invoice.setSupplierNip(invoiceDTO.getSupplierNip());
+            invoice.setSupplierAddress(invoiceDTO.getSupplierAddress());
+            invoice.setInvoiceNumber(invoiceDTO.getInvoiceNumber());
+            invoice.setAmountNet(invoiceDTO.getAmountNet());
+            invoice.setAmountVat(invoiceDTO.getAmountVat());
+            invoice.setAmountGross(invoiceDTO.getAmountGross());
+            List<String> vatList = new ArrayList<String>(invoiceDTO.getVatPercent());
+            invoice.setVatPercent(vatList);
+            invoice.setDescription(invoiceDTO.getDescription());
+            invoice.setInvoiceDate(invoiceDTO.getInvoiceDate());
+            invoice.setDueDate(invoiceDTO.getDueDate());
+
+
+            return invoiceRepository.save(invoice);
+
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }

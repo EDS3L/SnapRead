@@ -1,6 +1,7 @@
 package com.snapread.dev.invoice.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.snapread.dev.invoice.controller.request.InvoiceDTO;
 import com.snapread.dev.invoice.model.Invoice;
 import com.snapread.dev.invoice.service.InvoiceService;
 import com.snapread.dev.invoice.service.UsersInvoiceService;
@@ -54,6 +55,16 @@ public class InvoiceController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
 
+    }
+
+
+    @PutMapping("/correctInvoice")
+    public ResponseEntity<?> correctInvoice(@RequestBody InvoiceDTO invoiceDTO) {
+        try {
+            return ResponseEntity.ok(usersInvoiceService.editInvoice(invoiceDTO));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
 }
