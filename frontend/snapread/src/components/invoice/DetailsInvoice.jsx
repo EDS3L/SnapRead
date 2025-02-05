@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import PropTypes from 'prop-types';
 import InvoiceData from './detailsInvoiceComponents/InvoiceData';
 
@@ -25,6 +24,30 @@ function DetailsInvoice({
     }));
   };
 
+  const handleSave = async () => {
+    try {
+      const response = await invoiceService.correctInvoice(
+        invoiceId,
+        invoice.supplierName,
+        invoice.supplierNip,
+        invoice.supplierAddress,
+        invoice.invoiceNumber,
+        invoice.amountNet,
+        invoice.amountVat,
+        invoice.amountGross,
+        invoice.vatPercent,
+        invoice.description,
+        invoice.invoiceDate,
+        invoice.dueDate,
+        token
+      );
+      console.log(invoiceId);
+      console.log('Faktura zaktualizowana:', response);
+    } catch (error) {
+      console.error('Błąd podczas aktualizacji faktury:', error);
+    }
+  };
+
   useEffect(() => {
     const fetchInvoice = async () => {
       if (!token || !invoiceId) return;
@@ -37,7 +60,7 @@ function DetailsInvoice({
         );
         setInvoice(data);
       } catch (error) {
-        console.error('Error fetching invoice:', error);
+        console.error('Błąd pobierania faktury:', error);
       }
     };
     fetchInvoice();
@@ -47,27 +70,29 @@ function DetailsInvoice({
     <>
       {invoicePopup && (
         <div
-          className=" z-50 absolute w-full h-full bg-slate-600 bg-opacity-60 justify-center items-center flex"
+          className="z-50 absolute w-full h-full bg-slate-600 bg-opacity-60 flex justify-center items-center"
           onClick={handleInvoicePopup}
         >
           <div
-            className="w-5/6 h-5/6 bg-slate-50 "
+            className="w-5/6 h-5/6 bg-slate-50"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-end">
               <i className="fa-solid fa-x p-3" onClick={handleInvoicePopup}></i>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-5 w-full h-full bg-slate-200 p-3 gap-3 sm:max-h[auto] overflow-y-scroll">
-              <div className="w-full sm:h-[74.5vh] lg:h-full   lg:col-span-3 p-3">
+            <div className="grid grid-cols-1 lg:grid-cols-5 w-full h-full bg-slate-200 p-3 gap-3 overflow-y-scroll">
+              <div className="w-full lg:col-span-3 p-3">
                 <iframe
                   className="h-full w-full"
                   src={invoice.invoiceImage}
+                  title="Faktura"
                 ></iframe>
               </div>
               <InvoiceData
                 invoice={invoice}
                 handleInputChange={handleInputChange}
                 handleInvoicePopup={handleInvoicePopup}
+                handleSave={handleSave}
               />
             </div>
           </div>
@@ -76,6 +101,7 @@ function DetailsInvoice({
     </>
   );
 }
+
 DetailsInvoice.propTypes = {
   setinvoicePopup: PropTypes.func.isRequired,
   invoicePopup: PropTypes.bool.isRequired,

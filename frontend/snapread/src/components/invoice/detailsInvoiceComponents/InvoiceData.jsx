@@ -15,7 +15,12 @@ const labels = [
   { label: 'Termin płatności', name: 'dueDate' },
 ];
 
-function InvoiceData({ invoice, handleInputChange, handleInvoicePopup }) {
+function InvoiceData({
+  invoice,
+  handleInputChange,
+  handleInvoicePopup,
+  handleSave,
+}) {
   const [activeInput, setActiveInput] = useState(null);
 
   const inputBRef = useRef([]);
@@ -82,7 +87,10 @@ function InvoiceData({ invoice, handleInputChange, handleInvoicePopup }) {
           Anuluj
         </button>
 
-        <button className="bg-blue-600 hover:bg-blue-500 p-3 rounded-lg h-14 w-28 text-white font-bold">
+        <button
+          className="bg-blue-600 hover:bg-blue-500 p-3 rounded-lg h-14 w-28 text-white font-bold"
+          onClick={handleSave}
+        >
           Zapisz
         </button>
       </div>
@@ -95,6 +103,7 @@ InvoiceData.propTypes = {
   invoice: PropTypes.object.isRequired,
   handleInputChange: PropTypes.func.isRequired,
   handleInvoicePopup: PropTypes.func.isRequired,
+  handleSave: PropTypes.func.isRequired,
 };
 
 export default InvoiceData;

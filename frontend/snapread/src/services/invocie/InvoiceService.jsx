@@ -59,19 +59,15 @@ class InvoiceService {
 
   async sortInvoice(invoices, direction, value, token) {
     try {
-      const response = await axios.post(
-        `/api/invoice/sort`,
-        invoices, 
-        {
-          params: {
-            direction,
-            value,
-          },
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.post(`/api/invoice/sort`, invoices, {
+        params: {
+          direction,
+          value,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return response.data;
     } catch (err) {
       console.error(err.response?.data || err);
@@ -98,6 +94,50 @@ class InvoiceService {
       return response.data;
     } catch (err) {
       console.error(err.response.data || err);
+    }
+  }
+
+  async correctInvoice(
+    id,
+    supplierName,
+    supplierNip,
+    supplierAddress,
+    invoiceNumber,
+    amountNet,
+    amountVat,
+    amountGross,
+    vatPercent,
+    description,
+    invoiceDate,
+    dueDate,
+    token
+  ) {
+    try {
+      const response = await axios.put(
+        '/api/invoice/correctInvoice',
+        {
+          id: id,
+          supplierName: supplierName,
+          supplierNip: supplierNip,
+          supplierAddress: supplierAddress,
+          invoiceNumber: invoiceNumber,
+          amountNet: amountNet,
+          amountVat: amountVat,
+          amountGross: amountGross,
+          vatPercent: vatPercent,
+          description: description,
+          invoiceDate: invoiceDate,
+          dueDate: dueDate,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response;
+    } catch (e) {
+      console.error(e.response.data || e);
     }
   }
 }
