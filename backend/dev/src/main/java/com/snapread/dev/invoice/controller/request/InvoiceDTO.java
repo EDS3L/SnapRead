@@ -12,15 +12,15 @@ public class InvoiceDTO {
     private final String supplierNip;
     private final String supplierAddress;
     private final String invoiceNumber;
-    private final String amountNet;
-    private final String amountVat;
-    private final String amountGross;
+    private final double amountNet;
+    private final double amountVat;
+    private final double amountGross;
     private final List<String> vatPercent;
     private final String description;
     private final String invoiceDate;
     private final String dueDate;
 
-    public InvoiceDTO(Long id, String supplierName, String supplierNip, String supplierAddress, String invoiceNumber, String amountNet, String amountVat, String amountGross, List<String> vatPercent, String description, String invoiceDate, String dueDate) {
+    public InvoiceDTO(Long id, String supplierName, String supplierNip, String supplierAddress, String invoiceNumber, double amountNet, double amountVat, double amountGross, List<String> vatPercent, String description, String invoiceDate, String dueDate) {
         this.id = id;
         this.supplierName = supplierName;
         this.supplierNip = supplierNip;
@@ -55,15 +55,15 @@ public class InvoiceDTO {
         return invoiceNumber;
     }
 
-    public String getAmountNet() {
+    public double getAmountNet() {
         return amountNet;
     }
 
-    public String getAmountVat() {
+    public double getAmountVat() {
         return amountVat;
     }
 
-    public String getAmountGross() {
+    public double getAmountGross() {
         return amountGross;
     }
 

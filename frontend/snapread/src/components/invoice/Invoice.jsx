@@ -86,7 +86,7 @@ function Invoice() {
       {loading && (
         <Spinner
           loading={loading}
-          messageA="Czytam informacje na fakturze"
+          messageA="Czytam informacje z faktury"
           messageB="Zapisuje dane w systemie"
         />
       )}

@@ -19,9 +19,9 @@ public class Invoice {
     private String supplierName;
     private String supplierNip;
     private String supplierAddress;
-    private String amountNet;
-    private String amountVat;
-    private String amountGross;
+    private double amountNet;
+    private double amountVat;
+    private double amountGross;
     private List<String> vatPercent;
     private String invoiceDate;
     private String dueDate;
@@ -41,7 +41,7 @@ public class Invoice {
     public Invoice() {
     }
 
-    public Invoice(String invoiceNumber, String supplierName, String supplierNip, String supplierAddress, String amountNet, String amountVat, String amountGross, String invoiceDate, String dueDate, String description) {
+    public Invoice(String invoiceNumber, String supplierName, String supplierNip, String supplierAddress, double amountNet, double amountVat, double amountGross, String invoiceDate, String dueDate, String description) {
         this.invoiceNumber = invoiceNumber;
         this.supplierName = supplierName;
         this.supplierNip = supplierNip;
@@ -94,27 +94,27 @@ public class Invoice {
         this.supplierAddress = supplierAddress;
     }
 
-    public String getAmountNet() {
+    public double getAmountNet() {
         return amountNet;
     }
 
-    public void setAmountNet(String amountNet) {
+    public void setAmountNet(double amountNet) {
         this.amountNet = amountNet;
     }
 
-    public String getAmountVat() {
+    public double getAmountVat() {
         return amountVat;
     }
 
-    public void setAmountVat(String amountVat) {
+    public void setAmountVat(double amountVat) {
         this.amountVat = amountVat;
     }
 
-    public String getAmountGross() {
+    public double getAmountGross() {
         return amountGross;
     }
 
-    public void setAmountGross(String amountGross) {
+    public void setAmountGross(double amountGross) {
         this.amountGross = amountGross;
     }
 

@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import { useEffect } from "react";
+import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 
 function InvoiceTabel({
   invoiceService,
@@ -12,7 +12,7 @@ function InvoiceTabel({
   sortDirection,
   setSortDirection,
 }) {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     const fetchInvoices = async () => {
@@ -21,7 +21,7 @@ function InvoiceTabel({
         const data = await invoiceService.getUserInvoice(username, token);
         setInvoices(data);
       } catch (error) {
-        console.error("Error fetching invoices:", error);
+        console.error('Error fetching invoices:', error);
       }
     };
 
@@ -52,10 +52,10 @@ function InvoiceTabel({
 
   const handleSort = (field) => {
     if (sortField === field) {
-      setSortDirection(sortDirection === "ASC" ? "DESC" : "ASC");
+      setSortDirection(sortDirection === 'ASC' ? 'DESC' : 'ASC');
     } else {
       setSortField(field);
-      setSortDirection("ASC");
+      setSortDirection('ASC');
     }
   };
 
@@ -68,7 +68,7 @@ function InvoiceTabel({
         ></i>
       );
     }
-    return sortDirection === "ASC" ? (
+    return sortDirection === 'ASC' ? (
       <i
         className="fa-solid fa-sort-down p-1 cursor-pointer"
         onClick={() => handleSort(field)}
@@ -88,83 +88,85 @@ function InvoiceTabel({
           <tr>
             <th scope="col" className="px-6 py-3 whitespace-nowrap">
               ID
-              {renderSortIcon("id")}
+              {renderSortIcon('id')}
             </th>
             <th scope="col" className="px-6 py-3 whitespace-nowrap">
               Firma
-              {renderSortIcon("supplierName")}
+              {renderSortIcon('supplierName')}
             </th>
             <th scope="col" className="px-6 py-3 whitespace-nowrap">
               NIP
             </th>
             <th scope="col" className="px-6 py-3 whitespace-nowrap">
               Netto
-              {renderSortIcon("amountNet")}
+              {renderSortIcon('amountNet')}
             </th>
             <th scope="col" className="px-6 py-3 whitespace-nowrap">
               Vat
-              {renderSortIcon("amountVat")}
+              {renderSortIcon('amountVat')}
             </th>
             <th scope="col" className="px-6 py-3 whitespace-nowrap">
               Brutto
-              {renderSortIcon("amountGross")}
+              {renderSortIcon('amountGross')}
             </th>
             <th scope="col" className="px-6 py-3 whitespace-nowrap">
               Data dodania
-              {renderSortIcon("createdAt")}
+              {renderSortIcon('createdAt')}
             </th>
           </tr>
         </thead>
         <tbody>
-          {invoices.map((invoice) => (
-            <tr
-              className="even:bg-slate-50 hover:bg-yellow-50"
-              key={invoice.id}
-            >
-              <th
-                scope="row"
-                className="px-6 py-4 text-gray-900 font-bold whitespace-nowrap"
+          {invoices
+            .filter((invoice) => invoice !== undefined && invoice !== null)
+            .map((invoice) => (
+              <tr
+                className="even:bg-slate-50 hover:bg-yellow-50"
+                key={invoice.id}
               >
-                {invoice.id}
-              </th>
-              <td
-                className="px-6 py-4 whitespace-nowrap cursor-pointer"
-                onClick={() => handleInvoicePopup(invoice.id)}
-              >
-                {invoice.supplierName}
-              </td>
-              <td
-                className="px-6 py-4 whitespace-nowrap cursor-pointer"
-                onClick={() => handleInvoicePopup(invoice.id)}
-              >
-                {invoice.supplierNip}
-              </td>
-              <td
-                className="px-6 py-4 whitespace-nowrap cursor-pointer"
-                onClick={() => handleInvoicePopup(invoice.id)}
-              >
-                {invoice.amountNet}
-              </td>
-              <td
-                className="px-6 py-4 whitespace-nowrap cursor-pointer"
-                onClick={() => handleInvoicePopup(invoice.id)}
-              >
-                {invoice.amountVat}
-              </td>
-              <td
-                className="px-6 py-4 whitespace-nowrap cursor-pointer"
-                onClick={() => handleInvoicePopup(invoice.id)}
-              >
-                {invoice.amountGross}
-              </td>
-              <td
-                className="px-6 py-4 whitespace-nowrap cursor-pointer"
-                onClick={() => handleInvoicePopup(invoice.id)}
-              >
-                {new Date(invoice.createdAt).toLocaleDateString()}
-              </td>
-            </tr>
-          ))}
+                <th
+                  scope="row"
+                  className="px-6 py-4 text-gray-900 font-bold whitespace-nowrap"
+                >
+                  {invoice.id}
+                </th>
+                <td
+                  className="px-6 py-4 whitespace-nowrap cursor-pointer"
+                  onClick={() => handleInvoicePopup(invoice.id)}
+                >
+                  {invoice.supplierName}
+                </td>
+                <td
+                  className="px-6 py-4 whitespace-nowrap cursor-pointer"
+                  onClick={() => handleInvoicePopup(invoice.id)}
+                >
+                  {invoice.supplierNip}
+                </td>
+                <td
+                  className="px-6 py-4 whitespace-nowrap cursor-pointer"
+                  onClick={() => handleInvoicePopup(invoice.id)}
+                >
+                  {invoice.amountNet}
+                </td>
+                <td
+                  className="px-6 py-4 whitespace-nowrap cursor-pointer"
+                  onClick={() => handleInvoicePopup(invoice.id)}
+                >
+                  {invoice.amountVat}
+                </td>
+                <td
+                  className="px-6 py-4 whitespace-nowrap cursor-pointer"
+                  onClick={() => handleInvoicePopup(invoice.id)}
+                >
+                  {invoice.amountGross}
+                </td>
+                <td
+                  className="px-6 py-4 whitespace-nowrap cursor-pointer"
+                  onClick={() => handleInvoicePopup(invoice.id)}
+                >
+                  {new Date(invoice.createdAt).toLocaleDateString()}
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

@@ -1,10 +1,10 @@
-import { ClipLoader } from "react-spinners";
-import PropTypes from "prop-types";
-import { useState } from "react";
+import { ClipLoader } from 'react-spinners';
+import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 const override = {
-  display: "flex",
-  margin: "100px auto",
+  display: 'flex',
+  margin: '100px auto',
 };
 
 const Spinner = ({ loading, messageA, messageB }) => {
@@ -37,7 +37,7 @@ const Spinner = ({ loading, messageA, messageB }) => {
 };
 
 Spinner.propTypes = {
-  loading: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
   messageA: PropTypes.string.isRequired,
   messageB: PropTypes.string,
 };
