@@ -67,4 +67,13 @@ public class InvoiceController {
         }
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteInvoice(@PathVariable("id") Long id, @RequestParam("username") String username) {
+        try {
+            usersInvoiceService.deleteInvoice(id, username);
+            return ResponseEntity.ok("Invoice deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

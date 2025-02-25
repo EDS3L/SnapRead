@@ -1,10 +1,10 @@
-Poniżej znajdują się klucze i ich opisy:
+Poniżej znajdują się klucze i ich opisy, jeżeli stwierdzisz że nie jest to faktura, ustaw pola jako wartość null lub:
 
 invoiceNumber: The document number is a unique identifier assigned to an invoice or other official document. It is essential for tracking and referencing in both seller and buyer records. Typically labeled as "Numer Faktury," "Invoice Number," or simply "No.," it is usually found in the upper part of the document, near the document type or title.
 
 supplierName: The supplier's name identifies the business or individual providing the goods or services. Common labels include 'Supplier Name,' 'Nazwa Dostawcy,' or 'Vendor.' It is typically found near the top of the document alongside other supplier details.
 
-supplierNip: The supplier's tax identification number (NIP) is a unique identifier used for tax purposes. Common labels include 'NIP,' 'Tax ID,' or 'VAT Number,' and it is usually located near the supplier's name and address.
+supplierNip: The supplier's tax identification number (NIP) is a unique identifier used for tax purposes. Common labels include 'NIP,' 'Tax ID,' or 'VAT Number,' and it is usually located near the supplier's name and address. In case of dashes or blank spaces remove them.
 
 supplierAddress: The supplier's address specifies the location of the business or individual issuing the invoice. Common labels include 'Supplier Address,' 'Adres Dostawcy,' or 'Vendor Address,' and it is generally found near the supplier's name and other contact details.
 

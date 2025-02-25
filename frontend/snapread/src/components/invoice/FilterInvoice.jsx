@@ -8,6 +8,7 @@ function FilterInvoice({
   setInvoices,
   userService,
   setSortField,
+  setNotFound,
 }) {
   const [value, setValue] = useState({
     startDate: null,
@@ -38,7 +39,7 @@ function FilterInvoice({
     setCompanyName('');
     setValue({ startDate: null, endDate: null });
     setSortField(null);
-
+    setNotFound(false);
     fetchInvoices();
   };
 
@@ -60,7 +61,14 @@ function FilterInvoice({
       username,
       token
     );
-    setInvoices(response);
+    console.log(response.length);
+    if (response.length > 0) {
+      setNotFound(false);
+      setInvoices(response);
+    } else {
+      setNotFound(true);
+      console.log('niema');
+    }
   };
 
   return (
@@ -127,6 +135,7 @@ FilterInvoice.propTypes = {
     getUsernameFromToken: PropTypes.func.isRequired,
   }).isRequired,
   setSortField: PropTypes.func,
+  setNotFound: PropTypes.func.isRequired,
 };
 
 export default FilterInvoice;

@@ -22,6 +22,7 @@ function Invoice() {
   const [invoices, setInvoices] = useState([]);
   const [sortField, setSortField] = useState(null);
   const [sortDirection, setSortDirection] = useState('ASC');
+  const [notFound, setNotFound] = useState();
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -57,14 +58,18 @@ function Invoice() {
         setError
       );
       console.log(response);
+      if (response === undefined) {
+        toast.error('Nie udało się dodać faktury');
+      } else {
+        toast.success('Faktura została dodana');
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      }
     } catch (error) {
       toast.error('Błąd ', error);
     } finally {
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
       setLoading(false);
-      toast.success('Faktura została dodana');
     }
   };
 
@@ -116,7 +121,9 @@ function Invoice() {
             setInvoices={setInvoices}
             userService={userService}
             setSortField={setSortField}
+            setNotFound={setNotFound}
           />
+
           <InvoiceTabel
             userService={userService}
             invoiceService={invoiceService}
@@ -127,6 +134,7 @@ function Invoice() {
             setSortField={setSortField}
             sortDirection={sortDirection}
             setSortDirection={setSortDirection}
+            notFound={notFound}
           />
         </main>
         <footer></footer>

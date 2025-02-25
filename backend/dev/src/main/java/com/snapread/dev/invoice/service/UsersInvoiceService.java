@@ -105,4 +105,16 @@ public class UsersInvoiceService {
             throw new RuntimeException(e.getMessage());
         }
     }
+
+    @Transactional
+    public void deleteInvoice(Long id, String username) {
+            User user = userRepository.findByUsername(username).orElseThrow(() -> new NoSuchElementException("User with username " + username + " is not found"));
+            List<Invoice> invoices = user.getInvoices();
+            Invoice invoice2 = invoices.stream().filter(inv -> Objects.equals(inv.getId(), id)).findFirst().orElseThrow(() -> new NoSuchElementException("Invoice with id " + id + " not found for user " + username));
+
+            user.getInvoices().remove(invoice2);
+            invoiceRepository.delete(invoice2);
+            userRepository.save(user);
+
+    }
 }

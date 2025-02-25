@@ -140,6 +140,22 @@ class InvoiceService {
       console.error(e.response.data || e);
     }
   }
+
+  async deleteInvoice(id, username, token) {
+    try {
+      const response = await axios.delete(
+        `/api/invoice/delete/${id}?username=${username}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response;
+    } catch (err) {
+      console.error(err.response.data || err);
+    }
+  }
 }
 
 export default InvoiceService;

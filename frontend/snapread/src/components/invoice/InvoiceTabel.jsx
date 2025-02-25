@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
+import { toast, Zoom } from 'react-toastify';
 
 function InvoiceTabel({
   invoiceService,
@@ -11,13 +12,37 @@ function InvoiceTabel({
   setSortField,
   sortDirection,
   setSortDirection,
+  notFound,
 }) {
   const token = localStorage.getItem('token');
+  const username = userService.getUsernameFromToken(token);
+
+  const handleDelete = async (id) => {
+    try {
+      console.log(id);
+      const response = await invoiceService.deleteInvoice(id, username, token);
+      toast.info(response.data, {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+        transition: Zoom,
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
     const fetchInvoices = async () => {
       try {
-        const username = userService.getUsernameFromToken(token);
         const data = await invoiceService.getUserInvoice(username, token);
         setInvoices(data);
       } catch (error) {
@@ -28,7 +53,14 @@ function InvoiceTabel({
     if (token && invoices.length === 0) {
       fetchInvoices();
     }
-  }, [invoiceService, userService, token, setInvoices, invoices.length]);
+  }, [
+    invoiceService,
+    userService,
+    token,
+    setInvoices,
+    invoices.length,
+    username,
+  ]);
 
   useEffect(() => {
     const fetchSortedInvoices = async () => {
@@ -113,61 +145,81 @@ function InvoiceTabel({
               Data dodania
               {renderSortIcon('createdAt')}
             </th>
+            <th className="px-6 py-3 whitespace-nowrap">Akcje</th>
           </tr>
         </thead>
-        <tbody>
-          {invoices
-            .filter((invoice) => invoice !== undefined && invoice !== null)
-            .map((invoice) => (
-              <tr
-                className="even:bg-slate-50 hover:bg-yellow-50"
-                key={invoice.id}
-              >
-                <th
-                  scope="row"
-                  className="px-6 py-4 text-gray-900 font-bold whitespace-nowrap"
-                >
-                  {invoice.id}
-                </th>
-                <td
-                  className="px-6 py-4 whitespace-nowrap cursor-pointer"
-                  onClick={() => handleInvoicePopup(invoice.id)}
-                >
-                  {invoice.supplierName}
-                </td>
-                <td
-                  className="px-6 py-4 whitespace-nowrap cursor-pointer"
-                  onClick={() => handleInvoicePopup(invoice.id)}
-                >
-                  {invoice.supplierNip}
-                </td>
-                <td
-                  className="px-6 py-4 whitespace-nowrap cursor-pointer"
-                  onClick={() => handleInvoicePopup(invoice.id)}
-                >
-                  {invoice.amountNet}
-                </td>
-                <td
-                  className="px-6 py-4 whitespace-nowrap cursor-pointer"
-                  onClick={() => handleInvoicePopup(invoice.id)}
-                >
-                  {invoice.amountVat}
-                </td>
-                <td
-                  className="px-6 py-4 whitespace-nowrap cursor-pointer"
-                  onClick={() => handleInvoicePopup(invoice.id)}
-                >
-                  {invoice.amountGross}
-                </td>
-                <td
-                  className="px-6 py-4 whitespace-nowrap cursor-pointer"
-                  onClick={() => handleInvoicePopup(invoice.id)}
-                >
-                  {new Date(invoice.createdAt).toLocaleDateString()}
+
+        {notFound ? (
+          <>
+            <tbody>
+              <tr>
+                <td className="text-center p-3 text-xl" colSpan={8}>
+                  Brak wyników filtrowania
                 </td>
               </tr>
-            ))}
-        </tbody>
+            </tbody>
+          </>
+        ) : (
+          <tbody>
+            {invoices
+              .filter((invoice) => invoice !== undefined && invoice !== null)
+              .map((invoice) => (
+                <tr
+                  className="even:bg-slate-50 hover:bg-yellow-50"
+                  key={invoice.id}
+                >
+                  <th
+                    scope="row"
+                    className="px-6 py-4 text-gray-900 font-bold whitespace-nowrap"
+                  >
+                    {invoice.id}
+                  </th>
+                  <td
+                    className="px-6 py-4 whitespace-nowrap cursor-pointer"
+                    onClick={() => handleInvoicePopup(invoice.id)}
+                  >
+                    {invoice.supplierName}
+                  </td>
+                  <td
+                    className="px-6 py-4 whitespace-nowrap cursor-pointer"
+                    onClick={() => handleInvoicePopup(invoice.id)}
+                  >
+                    {invoice.supplierNip}
+                  </td>
+                  <td
+                    className="px-6 py-4 whitespace-nowrap cursor-pointer"
+                    onClick={() => handleInvoicePopup(invoice.id)}
+                  >
+                    {invoice.amountNet}
+                  </td>
+                  <td
+                    className="px-6 py-4 whitespace-nowrap cursor-pointer"
+                    onClick={() => handleInvoicePopup(invoice.id)}
+                  >
+                    {invoice.amountVat}
+                  </td>
+                  <td
+                    className="px-6 py-4 whitespace-nowrap cursor-pointer"
+                    onClick={() => handleInvoicePopup(invoice.id)}
+                  >
+                    {invoice.amountGross}
+                  </td>
+                  <td
+                    className="px-6 py-4 whitespace-nowrap cursor-pointer"
+                    onClick={() => handleInvoicePopup(invoice.id)}
+                  >
+                    {new Date(invoice.createdAt).toLocaleDateString()}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap cursor-pointer">
+                    <i
+                      className="fa-solid fa-trash hover:text-red-600"
+                      onClick={() => handleDelete(invoice.id)}
+                    ></i>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        )}
       </table>
     </div>
   );
@@ -177,6 +229,7 @@ InvoiceTabel.propTypes = {
   invoiceService: PropTypes.shape({
     getUserInvoice: PropTypes.func.isRequired,
     sortInvoice: PropTypes.func.isRequired,
+    deleteInvoice: PropTypes.func.isRequired,
   }).isRequired,
   userService: PropTypes.shape({
     getUsernameFromToken: PropTypes.func.isRequired,
@@ -188,6 +241,7 @@ InvoiceTabel.propTypes = {
   setSortField: PropTypes.func.isRequired,
   sortDirection: PropTypes.string.isRequired,
   setSortDirection: PropTypes.func.isRequired,
+  notFound: PropTypes.bool,
 };
 
 export default InvoiceTabel;
