@@ -16,6 +16,9 @@ SnapRead oferuje kilka modułów, które dostosowują się do różnych potrzeb:
 - **Samochód:** Przechowywanie danych z dokumentów pojazdu (dowód rejestracyjny, ubezpieczenie, przeglądy) z powiadomieniami o ważnych terminach.
 - **Lista zakupów:** Powiedz, co chcesz zjeść, a SnapRead wygeneruje listę zakupów wraz z szacowanym kosztem – idealne do planowania budżetu!
 
+![obraz](https://github.com/user-attachments/assets/6014a6cd-88ab-489d-99dd-f35943e98757)
+
+
 ## Technologie
 
 SnapRead wykorzystuje zaawansowany stos technologiczny, łącząc sztuczną inteligencję z nowoczesnymi frameworkami:
